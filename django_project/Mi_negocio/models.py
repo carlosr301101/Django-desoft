@@ -1,7 +1,15 @@
 from django.db import models
 
 # Create your models here.
+class Tienda(models.Model):
+    nombre=models.CharField(max_length=64)
+    direccion=models.TextField(max_length=200)
+    telefono=models.CharField(max_length=12)
+    correo=models.EmailField()
+
+
 class Articulo(models.Model):
+    id=models.BigAutoField(auto_created=True, primary_key=True, serialize=False)
     titulo = models.CharField(max_length=200)
     descripcion = models.TextField()
     precio = models.CharField(max_length=10)

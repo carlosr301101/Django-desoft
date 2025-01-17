@@ -25,3 +25,8 @@ def subir_articulo(request):
 def lista_articulos(request):
     articulos = Articulo.objects.all()
     return render(request, 'Mi_negocio/lista_articulos.html', {'articulos': articulos})
+
+def borrar(request,id_borrar:int):
+    articulos=Articulo.objects.all()
+    articulos[id_borrar].delete()
+    return render(request, 'Mi_negocio/lista_articulos.html', {'articulos': articulos})
