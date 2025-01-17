@@ -1,2 +1,3 @@
 /.venv
 *django_project/
+manage.py
