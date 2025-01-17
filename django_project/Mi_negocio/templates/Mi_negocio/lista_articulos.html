@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Artículos</title>
+</head>
+<body>
+    <h1>Lista de Artículos</h1>
+    {% if articulos %}
+        <ul>
+            {% for articulo in articulos %}
+                <li>
+                    <h2>{{ articulo.titulo }}</h2>
+                    <img src="{{ articulo.imagen.url }}" alt="{{ articulo.titulo }}" width="200">
+                    <p>{{ articulo.descripcion }}</p>
+                    <p>{{articulo.precio}}$</p>
+                    <p>Publicado el: {{ articulo.fecha_publicacion }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No hay artículos disponibles.</p>
+    {% endif %}
+</body>
+</html>

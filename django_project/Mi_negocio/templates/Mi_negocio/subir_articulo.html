@@ -1,0 +1,16 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Subir Artículo</title>
+    <link rel="stylesheet" href="{% static 'Mi_negocio/style.css' %}">
+</head>
+<body>
+    <h1>Subir Nuevo Artículo</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Subir Artículo</button>
+    </form>
+</body>
+</html>
