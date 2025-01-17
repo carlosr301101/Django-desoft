@@ -4,7 +4,7 @@ from django.db import models
 class Articulo(models.Model):
     titulo = models.CharField(max_length=200)
     descripcion = models.TextField()
-    precio = models.TextField(verbose_name="Introducir el precio")
+    precio = models.CharField(max_length=10)
     imagen = models.ImageField(upload_to='articulos/')
     fecha_publicacion = models.DateTimeField(auto_now_add=True)
 

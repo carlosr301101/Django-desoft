@@ -1,6 +1,10 @@
 {% extends "Mi_negocio/layout.html" %}
 {% block body %}
     <h1>Lista de Artículos</h1>
+    <h2>
+        <a href="{% url 'subir_articulo'%}">Ingresar articulo</a>
+        
+    </h2>
     {% if articulos %}
         <ul>
             {% for articulo in articulos %}

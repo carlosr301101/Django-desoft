@@ -3,6 +3,10 @@
 
 {% block body %}
     <h1>Subir Nuevo Artículo</h1>
+    <h2>
+        <a href="{% url 'lista_articulos'%}">Revisar articulos</a>
+        
+    </h2>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}

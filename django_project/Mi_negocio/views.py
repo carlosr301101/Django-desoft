@@ -1,16 +1,16 @@
 from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from .forms import ArticuloForm
 from .models import Articulo
 # Create your views here.
+
+def blank (request):
+    return HttpResponseRedirect('subir')
+
+
 def index(request):
     return render(request,"Mi_negocio/index.html")
-
-def greet(request, name:str):
-    return render(request, "Mi_negocio/greet.html",{
-     "name": name.capitalize()   
-    })
-
 
 def subir_articulo(request):
     if request.method == 'POST':
