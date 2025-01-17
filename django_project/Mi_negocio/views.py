@@ -20,8 +20,8 @@ def subir_articulo(request):
             return redirect('lista_articulos')
     else:
         form = ArticuloForm()
-    return render(request, 'mi_app/subir_articulo.html', {'form': form})
+    return render(request, 'Mi_negocio/subir_articulo.html', {'form': form})
 
 def lista_articulos(request):
     articulos = Articulo.objects.all()
-    return render(request, 'mi_app/lista_articulos.html', {'articulos': articulos})
+    return render(request, 'Mi_negocio/lista_articulos.html', {'articulos': articulos})
