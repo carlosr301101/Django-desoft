@@ -1,9 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Lista de Artículos</title>
-</head>
-<body>
+{% extends "Mi_negocio/layout.html" %}
+{% block body %}
     <h1>Lista de Artículos</h1>
     {% if articulos %}
         <ul>
@@ -20,5 +16,4 @@
     {% else %}
         <p>No hay artículos disponibles.</p>
     {% endif %}
-</body>
-</html>
+{% endblock body%}
