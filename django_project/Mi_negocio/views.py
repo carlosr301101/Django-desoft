@@ -7,8 +7,7 @@ from .models import Articulo
 from django.contrib.auth.forms import AuthenticationForm
 # Create your views here.
 
-
-def custom_login(request):
+"""def custom_login(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
@@ -19,6 +18,7 @@ def custom_login(request):
         form = AuthenticationForm()
     
     return render(request, 'Mi_negocio/login.html', {'form': form})
+"""
 
 def blank (request):
     return HttpResponseRedirect('subir')

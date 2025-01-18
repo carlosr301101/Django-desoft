@@ -1,0 +1,9 @@
+{% extends "registration/layout.html" %}
+{% block body %}
+<h1>Iniciar sesión</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Iniciar sesión</button>
+</form>
+{% endblock body%}
