@@ -1,16 +1,62 @@
-form{
-    font-family: 'Courier New', Courier, monospace;
-    text-align: left;
-}
-h1 {
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    text-align: center;
-    color: rgb(187, 81, 20);
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
 }
 
-h2 {
-    text-align: center;
+/* Header fijo */
+.fixed-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+    z-index: 1000;
 }
-a{
+
+.fixed-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.fixed-header h1 {
+    margin: 0;
+}
+
+.fixed-header nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.fixed-header nav ul li {
+    margin-left: 20px;
+}
+
+.fixed-header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.fixed-header nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Espacio para el contenido debajo del header */
+.content {
+    margin-top: 80px; /* Espacio para que no quede tapado por el header fijo */
+    padding: 20px;
+}
+
+/* Footer */
+footer {
     text-align: center;
+    padding: 10px;
+    background-color: #333;
+    color: white;
 }

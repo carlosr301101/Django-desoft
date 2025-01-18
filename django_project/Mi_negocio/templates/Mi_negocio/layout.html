@@ -1,5 +1,6 @@
 {% load static %}
-<html lang="en">
+<!DOCTYPE html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,41 @@
     <link rel="stylesheet" href="{% static 'Mi_negocio/style.css' %}">
 </head>
 <body>
-    {% block body%}
-    {% endblock %}
+    <header class="fixed-header">
+        <div class="container">
+            <h1>Mi_negocio</h1>
+            <nav>
+                <ul>
+                    <li><a href="home">Inicio</a></li>
+                        <li><a href="#">Acerca de</a></li>
+                        <li><a href="{% url 'lista_articulos'%}">Servicios</a></li>
+                    <!-- 
+                        <li><a href="">Contacto</a></li>
+                        {% if user.is_authenticated %}
+                        <p>Hola {{ user.username }}!</p>
+                        {%else%}
+                        <li><button href="{% url 'login'%}">Login</button></li>
+                        {%endif%}
+                        <li>
+                        <form action="{% url 'logout' %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit">Log Out</button>
+                        </form>
+                     -->    
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Contenido principal -->
+    <div class="content">
+        {% block body %}
+        {% endblock body %}
+    </div>
+
+    <footer>
+        <p>&copy; 2025 @int_64</p>
+    </footer>
 </body>
 </html>
