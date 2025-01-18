@@ -7,13 +7,21 @@
 <h1>
 Hola {{ user.username }}!
 </h1>
-<a href="{%url  'subir_articulo'%}">Subir un articulo </a>
+<div>
+    <a href="{% url 'subir_articulo'%}">Subir_articulo</a>
+</div>
+<div>
+    <a href="{% url 'lista_articulos'%}">Lista_articulos</a>
+</div>
 <form action="{% url 'logout' %}" method="post">
     {% csrf_token %}
     <button type="submit">Log Out</button>
   </form>
 {% else %}
 <p>No esta logueado</p>
+<div>
 <a href="{% url 'login' %}">Log In</a>
+</div>
+<div><a href="{% url 'signup' %}">Signup</a></div>
 {% endif %}
 {% endblock body%}
