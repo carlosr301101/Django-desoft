@@ -16,19 +16,24 @@
                     <li><a href="home">Inicio</a></li>
                         <li><a href="#">Acerca de</a></li>
                         <li><a href="{% url 'lista_articulos'%}">Servicios</a></li>
-                    <!-- 
+                     
                         <li><a href="">Contacto</a></li>
                         {% if user.is_authenticated %}
-                        <p>Hola {{ user.username }}!</p>
+                        <li>{{ user.username }}</li>
                         {%else%}
-                        <li><button href="{% url 'login'%}">Login</button></li>
+                        <li>
+                        <form action="{% url 'login' %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit">Login</button>
+                        </form>
+                        </li>
                         {%endif%}
                         <li>
                         <form action="{% url 'logout' %}" method="post">
                             {% csrf_token %}
                             <button type="submit">Log Out</button>
                         </form>
-                     -->    
+                        
                     </li>
                 </ul>
             </nav>

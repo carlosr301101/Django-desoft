@@ -13,10 +13,6 @@ Hola {{ user.username }}!
 <div>
     <a href="{% url 'lista_articulos'%}">Lista_articulos</a>
 </div>
-<form action="{% url 'logout' %}" method="post">
-    {% csrf_token %}
-    <button type="submit">Log Out</button>
-  </form>
 {% else %}
 <p>No esta logueado</p>
 <div>
