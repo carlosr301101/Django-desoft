@@ -10,14 +10,14 @@
 <body>
     <header class="fixed-header">
         <div class="container">
-            <h1>Mi_negocio</h1>
+            <h1 id="logo"><a href="{%url 'index'%}">Mi_negocio</a></h1>
             <nav>
                 <ul>
                     <li><a href="{% url 'index'%}">Inicio</a></li>
                         <li><a href="#">Acerca de</a></li>
-                        <li><a href="{% url 'lista_articulos'%}">Servicios</a></li>
+                        <li><a href="{% url 'lista_articulos'%}">Lista de articulos</a></li>
                      
-                        <li><a href="">Contacto</a></li>
+                        <li><a url="https://github.com/carlosr301101">Contacto</a></li>
                         {% if user.is_authenticated %}
                         <li>{{ user.username }}</li>
                         {%else%}

@@ -6,16 +6,15 @@
 <div>
     <a href="{% url 'listar_tiendas'%}">Ver Tiendas</a>
 </div>
+<div>
+    <a href="{% url 'lista_articulos'%}">Lista_articulos</a>
+</div>
 {% if user.is_authenticated %}
 <h1>
 Hola {{ user.username }}!
 </h1>
 <div>
     <a href="{% url 'crear_tienda'%}">Crear Tienda</a>
-</div>
-
-<div>
-    <a href="{% url 'lista_articulos'%}">Lista_articulos</a>
 </div>
 {% else %}
 <p>No esta logueado</p>
