@@ -16,11 +16,11 @@ class Tienda(models.Model):
 
 class Articulo(models.Model):
   #  id=models.BigAutoField(auto_created=True, primary_key=True, serialize=False)
+    tienda = models.ForeignKey(Tienda, on_delete=models.CASCADE,related_name='articulos')
     titulo = models.CharField(max_length=200)
     descripcion = models.TextField()
     precio = models.DecimalField(max_digits=10, decimal_places=2)
     imagen = models.ImageField(upload_to='articulos/')
-    tienda = models.ForeignKey('Tienda', related_name='articulos', on_delete=models.CASCADE)
     fecha_publicacion = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

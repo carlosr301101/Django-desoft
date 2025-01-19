@@ -1,0 +1,16 @@
+{% extends 'Mi_negocio/layout.html' %}
+
+{% block body %}
+    <h2>Lista de tiendas</h2>
+    <ul>
+        {% for tienda in tiendas %}
+            <li>
+                <a href="{% url 'ver_tienda' tienda_id=tienda.id %}">{{ tienda.nombre }}</a>
+                <!-- Botón para acceder a los artículos de la tienda 
+                <a href="{% url 'ver_tienda' tienda_id=tienda.id %}">Ver artículos</a> 
+                -->
+                
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

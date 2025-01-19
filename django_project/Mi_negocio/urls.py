@@ -10,8 +10,10 @@ urlpatterns=[
     path('', views.index, name='index'),
     path('subir/', views.subir_articulo, name='subir_articulo'),
     path('articulos/', views.lista_articulos, name='lista_articulos'),
-    
+
+    path('listar_tiendas/', views.listar_tiendas, name='listar_tiendas'),
     path('crear_tienda/', views.crear_tienda, name='crear_tienda'),
-    path('crear_articulo/<int:tienda_id>/', views.crear_articulo, name='subir_articulo'),
     path('ver_tienda/<int:tienda_id>/', views.ver_tienda, name='ver_tienda'),
+    path('ver_tienda/<int:tienda_id>/agregar_articulo/', views.agregar_articulo, name='agregar_articulo'),
+    path('ver_tienda/eliminar/<int:articulo_id>/', views.eliminar_articulo, name='eliminar_articulo'),
 ]

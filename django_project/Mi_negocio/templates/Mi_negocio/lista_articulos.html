@@ -1,27 +1,27 @@
 {% extends "Mi_negocio/layout.html" %}
 {% block body %}
     <h1>Lista de Artículos</h1>
-    <h2>
-        <a href="{% url 'subir_articulo'%}">Ingresar articulo</a>
-        
-    </h2>
-    {% if articulos %}
+    {% if tiendas %}
         <ul>
-            {% for articulo in articulos %}
-                <li>
+            {% for tienda in tiendas %}
+            <li>
+                <h1>
+                {{tienda.nombre}}
+            </h1>
+            </li>
+            {%for articulo in tienda.articulos.all%}
+                <div>
                     <h2>{{ articulo.titulo }}</h2>
                     <img src="{{ articulo.imagen.url }}" alt="{{ articulo.titulo }}" width="200">
                     <p>{{ articulo.descripcion }}</p>
                     <p>{{articulo.precio}}$</p>
                     <p>Publicado el: {{ articulo.fecha_publicacion }}</p>
-                </li>
+                </div>
+            {% endfor %}
             {% endfor %}
         </ul>
     {% else %}
         <p>No hay artículos disponibles.</p>
     {% endif %}
-    <h2>
-        <a href="{% url 'home'%}">Home_page</a>
-        
-    </h2>
+
 {% endblock body%}

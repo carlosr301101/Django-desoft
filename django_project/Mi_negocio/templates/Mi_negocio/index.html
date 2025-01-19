@@ -3,6 +3,9 @@
 {% block title %}Home{% endblock %}
 
 {% block body %}
+<div>
+    <a href="{% url 'listar_tiendas'%}">Ver Tiendas</a>
+</div>
 {% if user.is_authenticated %}
 <h1>
 Hola {{ user.username }}!
@@ -10,9 +13,7 @@ Hola {{ user.username }}!
 <div>
     <a href="{% url 'crear_tienda'%}">Crear Tienda</a>
 </div>
-<div>
-    <a href="{% url 'subir_articulo'%}">Subir_articulo</a>
-</div>
+
 <div>
     <a href="{% url 'lista_articulos'%}">Lista_articulos</a>
 </div>

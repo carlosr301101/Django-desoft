@@ -6,9 +6,28 @@
     <p>Correo: {{ tienda.correo }}</p>
 
     <h3>Artículos</h3>
+    <div>
     <ul>
         {% for articulo in tienda.articulos.all %}
-            <li>{{ articulo.nombre }} - ${{ articulo.precio }}</li>
+            <li>{{ articulo.titulo }} - ${{ articulo.precio }}</li>
+            <div>
+                <img src="{{ articulo.imagen.url }}" alt="{{ articulo.titulo }}" width="200">
+                <p>{{ articulo.descripcion }}</p>
+                <p>Publicado el: {{ articulo.fecha_publicacion }}</p>
+            </div>
+            {% if articulo.tienda.propietario == user %}
+                <!-- Botón para eliminar el artículo -->
+                <form action="{% url 'eliminar_articulo' articulo.id %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" onclick="return confirm('¿Estás seguro de que deseas eliminar este artículo?');">Eliminar</button>
+                </form>
+            {% endif %}
         {% endfor %}
     </ul>
+</div>
+    {% if request.user == tienda.propietario %}
+        <a href="{% url 'agregar_articulo' tienda_id=tienda.id %}">
+            <button>Agregar artículo</button>
+        </a>
+    {% endif %}
 {% endblock %}
