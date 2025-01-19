@@ -1,0 +1,10 @@
+{% extends 'Mi_negocio/layout.html' %}
+
+{% block body %}
+    <h2>Crear nueva tienda</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ tiend_form.as_p }}
+        <button type="submit">Crear tienda</button>
+    </form>
+{% endblock %}

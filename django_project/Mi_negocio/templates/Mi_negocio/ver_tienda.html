@@ -1,0 +1,14 @@
+{% extends 'Mi_negocio/layout.html' %}
+
+{% block body %}
+    <h2>{{ tienda.nombre }}</h2>
+    <p>Dirección: {{ tienda.direccion }}</p>
+    <p>Correo: {{ tienda.correo }}</p>
+
+    <h3>Artículos</h3>
+    <ul>
+        {% for articulo in tienda.articulos.all %}
+            <li>{{ articulo.nombre }} - ${{ articulo.precio }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

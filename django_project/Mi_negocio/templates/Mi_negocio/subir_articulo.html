@@ -7,10 +7,11 @@
         <a href="{% url 'lista_articulos'%}">Revisar articulos</a>
         
     </h2>
-    <form method="post" enctype="multipart/form-data">
+    <h2>Agregar artículo a {{ tienda.nombre }}</h2>
+    <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Subir Artículo</button>
+        {{ articulo_form.as_p }}
+        <button type="submit">Agregar artículo</button>
     </form>
     <h2>
         <a href="{% url 'home'%}">Home_page</a>
