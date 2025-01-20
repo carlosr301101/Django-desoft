@@ -4,9 +4,10 @@
 
 {% block body %}
 <h2>Sign up</h2>
+{% load crispy_forms_tags %}
 <form method="post">
   {% csrf_token %}
-  {{ form }}
+  {{ form.as_p}}
   <button type="submit">Sign Up</button>
 </form>
 {% endblock body%}

@@ -38,6 +38,7 @@ def eliminar_articulo(request, articulo_id):
     
     # Verificar si el usuario es el propietario de la tienda
     if articulo.tienda.propietario == request.user:
+        
         articulo.delete()
     
     return redirect('ver_tienda', tienda_id=articulo.tienda.id)
