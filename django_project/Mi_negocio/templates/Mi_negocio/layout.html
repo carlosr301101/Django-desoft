@@ -17,7 +17,7 @@
                         <li><a href="#">Acerca de</a></li>
                         <li><a href="{% url 'lista_articulos'%}">Lista de articulos</a></li>
                      
-                        <li><a url="https://github.com/carlosr301101">Contacto</a></li>
+                        <li><a href="https://github.com/carlosr301101">Contacto</a></li>
                         {% if user.is_authenticated %}
                         <li>{{ user.username }}</li>
                         {%else%}

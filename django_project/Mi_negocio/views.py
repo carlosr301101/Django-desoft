@@ -12,8 +12,8 @@ def index(request):
     return render(request,"Mi_negocio/index.html")
 
 def listar_tiendas(request):
-    tiendas = Tienda.objects.all()
-    return render(request, 'Mi_negocio/listar_tiendas.html', {'tiendas': tiendas})
+    tiendas = Tienda.objects.all()  
+    return render(request, 'Mi_negocio/listar_tiendas.html', {'tiendas': tiendas, 'cantidad':tiendas.count })
 
 
 @login_required(login_url='login')
