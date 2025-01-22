@@ -3,6 +3,8 @@
     <h1>Lista de Artículos</h1>
     {% if tiendas %}
         <ul>
+            <div class="container mt-5">
+                <div class="row">
             {% for tienda in tiendas %}
             {%if tienda.articulos.all%}
             <li>
@@ -11,6 +13,7 @@
                 <a href="{% url 'ver_tienda' tienda_id=tienda.id %}"> {{tienda.nombre}}</a>
             </h1>
             </li>
+
             {%for articulo in tienda.articulos.all%}
             
                 <div>
@@ -18,7 +21,7 @@
                     <img src="{{ articulo.imagen.url }}" alt="{{ articulo.titulo }}" width="200">
                     <p>{{ articulo.descripcion }}</p>
                     <p>{{articulo.precio}}$</p>
-                    <p>Publicado el: {{ articulo.fecha_publicacion }}</p>
+                   <!--  <p>Publicado el: {{ articulo.fecha_publicacion }}</p> -->
                 </div>
                 
 
@@ -30,5 +33,6 @@
     {% else %}
         <p>No hay artículos disponibles.</p>
     {% endif %}
-
+    </div>
+</div>
 {% endblock body%}

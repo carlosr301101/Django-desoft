@@ -1,9 +1,10 @@
 {% extends "Mi_negocio/layout.html" %}
 {% block body %}
+{% load crispy_forms_tags %}
 <h1>Iniciar sesión</h1>
 <form method="post">
     {% csrf_token %}
-    {{ form.as_p | crispy}}
-    <button type="submit">Iniciar sesión</button>
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Iniciar sesión</button>
 </form>
 {% endblock body%}

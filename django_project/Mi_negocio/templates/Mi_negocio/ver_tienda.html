@@ -13,7 +13,7 @@
             <div>
                 <img src="{{ articulo.imagen.url }}" alt="{{ articulo.titulo }}" width="200">
                 <p>{{ articulo.descripcion }}</p>
-                <p>Publicado el: {{ articulo.fecha_publicacion }}</p>
+              <!--   <p>Publicado el: {{ articulo.fecha_publicacion }}</p> -->
             </div>
             {% if articulo.tienda.propietario == user %}
                 <!-- Botón para eliminar el artículo -->
