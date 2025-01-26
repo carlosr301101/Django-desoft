@@ -13,7 +13,7 @@
                 <a href="{% url 'ver_tienda' tienda_id=tienda.id %}"> {{tienda.nombre}}</a>
             </h1>
             </li>
-
+            
             {%for articulo in tienda.articulos.all%}
             
                 <div>
@@ -23,8 +23,7 @@
                     <p>{{articulo.precio}}$</p>
                    <!--  <p>Publicado el: {{ articulo.fecha_publicacion }}</p> -->
                 </div>
-                
-
+     
             {% endfor %}
             {%else%}
             {%endif%}

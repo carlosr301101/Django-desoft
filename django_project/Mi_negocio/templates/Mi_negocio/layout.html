@@ -12,37 +12,51 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 </head>
 <body>
-    <header class="fixed-header">
-        <div class="container">
-            <h1 id="logo"><a href="{%url 'index'%}">Mi_negocio</a></h1>
-            <nav>
-                <ul>
-                    <li><a href="{% url 'index'%}">Inicio</a></li>
-                        <li><a href="#">Acerca de</a></li>
-                        <li><a href="{% url 'lista_articulos'%}">Lista de articulos</a></li>
-                     
-                        <li><a href="https://github.com/carlosr301101">Contacto</a></li>
-                        {% if user.is_authenticated %}
-                        <li>{{ user.username }}</li>
-                        {%else%}
-                        <li>
-                        <form action="{% url 'login' %}" method="post">
-                            {% csrf_token %}
-                            <button type="submit">Login</button>
-                        </form>
-                        </li>
-                        {%endif%}
-                        <li>
-                        <form action="{% url 'logout' %}" method="post">
-                            {% csrf_token %}
-                            <button type="submit">Log Out</button>
-                        </form>
-                        
-                    </li>
-                </ul>
-            </nav>
+
+<header class="p-3 text-bg-dark" style="background-color: #333">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+          Mi_negocio<svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
+        </a>
+
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+            <li><a href="{% url 'index'%}" class="nav-link px-2 text-white">Inicio</a></li>
+            <li><a href="#" class="nav-link px-2 text-white">Acerca de</a></li>
+            <li><a href="{% url 'lista_articulos'%}" class="nav-link px-2 text-white">Lista de articulos</a></li>
+         
+            <li><a href="https://github.com/carlosr301101" class="nav-link px-2 text-white">Contacto</a></li>
+            {% if user.is_authenticated %}
+            <li>{{ user.username }}</li>
+            {%endif%}
+        </ul>
+
+        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+          <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">
+        </form>
+
+        <div class="text-end">
+        
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+    
+                <form action="{% url 'login' %}" method="post">
+                    {% csrf_token %}
+                <button type="submit"  class="btn btn-outline-light me-2" >Login</button>
+                </form>
+          
+            
+        
+            <form action="{% url 'signup' %}" method="post">
+                {% csrf_token %}
+          <button type="submit" class="btn btn-warning">Sign-up</button>
+         </form>
+        </ul>
+
         </div>
-    </header>
+      </div>
+    </div>
+  </header>
+
 
     <!-- Contenido principal -->
     <div class="content">

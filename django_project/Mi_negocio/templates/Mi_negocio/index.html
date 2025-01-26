@@ -3,12 +3,14 @@
 {% block title %}Home{% endblock %}
 
 {% block body %}
+<ul class="container">
 <div>
     <a href="{% url 'listar_tiendas'%}">Ver Tiendas</a>
 </div>
 <div>
     <a href="{% url 'lista_articulos'%}">Lista_articulos</a>
 </div>
+</ul>
 {% if user.is_authenticated %}
 <h1>
 Hola {{ user.username }}!
