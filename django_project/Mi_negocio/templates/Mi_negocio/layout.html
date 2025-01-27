@@ -1,5 +1,5 @@
 {% load static %}
-{% load crispy_forms_tags %}
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -14,14 +14,17 @@
 <body>
 
 <header class="p-3 text-bg-dark" style="background-color: #333">
-    <div class="container">
+    <div class="container-fluid flex-wrap">
+    <div class="row align-items-center">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        
         <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+        <img src="{% static 'Mi_negocio/logo.png' %}" alt="Logo de la empresa" class="logo">
           Mi_negocio<svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
         </a>
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="{% url 'index'%}" class="nav-link px-2 text-white">Inicio</a></li>
+            
             <li><a href="#" class="nav-link px-2 text-white">Acerca de</a></li>
             <li><a href="{% url 'lista_articulos'%}" class="nav-link px-2 text-white">Lista de articulos</a></li>
          
@@ -56,6 +59,8 @@
 
         </div>
       </div>
+    </div>
+  
     </div>
   </header>
 

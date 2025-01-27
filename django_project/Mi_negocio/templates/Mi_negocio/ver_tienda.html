@@ -1,11 +1,17 @@
 {% extends 'Mi_negocio/layout.html' %}
 
 {% block body %}
-
-    <h2 class="my-4">{{ tienda.nombre }}</h2>
+<div class="row">
+<div class="card h-100">
+    <h2 >{{ tienda.nombre }}</h2>
     <p>Dirección: {{ tienda.direccion }}</p>
-    <p>Correo: {{ tienda.correo }}</p>
+    <p> Correo: <a href="mailto:{{ tienda.correo }}?subject=Consulta tienda {{ tienda.nombre }}" >{{ tienda.correo }}</a>
+    </p>
+    <p>Telefono:<a href="https://wa.me/{{tienda.telefono}}?text=Hola%20estoy%20interesado%20en%20información" class="button-whatsapp" target="_blank">{{ tienda.telefono }}</a> </p>
+</div>
+</div>
     {% if page_obj %}
+
     <h3>Artículos</h3>
     <div>
 

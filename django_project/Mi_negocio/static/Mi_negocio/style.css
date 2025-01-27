@@ -3,6 +3,22 @@ h1 a {
     text-decoration: none;
     font-weight: bold;
 }
+.logo {
+    height: 50px; /* Ajusta la altura del logo */
+    margin-right: 20px; /* Espacio entre el logo y el título */
+}
+header {
+    /*position: fixed; /* Fija el header en la parte superior */
+    top: 0;          /* Lo coloca en la parte superior */
+    left: 0;         /* Lo alinea a la izquierda */
+    width: 100%;     /* Ocupa el ancho completo de la página */
+    background-color: #333; /* Color de fondo */
+    color: white;    /* Color del texto */
+    padding: 10px 0; /* Espaciado interno */
+    z-index: 1000;   /* Asegura que el header esté por encima de otros elementos */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra para efecto visual */
+}
+
 h1.link_tienda  a{
     color: black;
     text-decoration:underline;
@@ -58,7 +74,7 @@ body {
 */
 /* Espacio para el contenido debajo del header */
 .content {
-    margin-top: 80px; /* Espacio para que no quede tapado por el header fijo */
+    margin-top: 70px; /* Espacio para que no quede tapado por el header fijo */
     padding: 20px;
 }
 

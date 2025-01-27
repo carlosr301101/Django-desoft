@@ -1,10 +1,25 @@
 {% extends 'Mi_negocio/layout.html' %}
 
+
 {% block body %}
-    <h2>Crear nueva tienda</h2>
+
+<div class="container mt-5">
+    <div class="row ">
+      <div class="col-md-8">
+        <div class="card shadow">
+          <div class="card-header bg-primary text-white">
+            <h3 class="card-title text-center">Crear Nueva Tienda</h3>
+          </div>
+          <div class="card-body">
+            
     <form method="post">
         {% csrf_token %}
-        {{ tienda_form.as_p }}
-        <button type="submit">Crear tienda</button>
+        {{ tienda_form }}
+        <button type="submit" class="btn btn-secondary">Crear tienda</button>
     </form>
+        </div>
+</div>
+</div>
+</div>
+</div>
 {% endblock %}
