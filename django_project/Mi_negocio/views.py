@@ -94,7 +94,24 @@ def agregar_articulo(request, tienda_id):
 
 def ver_tienda(request, tienda_id):
     tienda = Tienda.objects.get(id=tienda_id)
-    return render(request, 'Mi_negocio/ver_tienda.html', {'tienda': tienda})
+
+    articulos=Articulo.objects.filter(tienda=tienda_id)
+
+    paginator = Paginator(articulos, 6)
+    page_number = request.GET.get('page')  
+
+    try:
+        page_obj = paginator.get_page(page_number)
+    except PageNotAnInteger:
+        page_obj = paginator.get_page(1)
+    except EmptyPage:
+        page_obj = paginator.get_page(paginator.num_pages)
+
+    return render(request, 'Mi_negocio/ver_tienda.html', {
+        'tienda': tienda,
+        'page_obj': page_obj,
+    })
+
 
 
 def buscar_articulos(request):
