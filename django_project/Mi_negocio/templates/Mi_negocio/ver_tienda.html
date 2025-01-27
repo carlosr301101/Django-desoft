@@ -7,27 +7,38 @@
 
     <h3>Artículos</h3>
     <div>
+
     <ul>
+        <div class="row">
         {% for articulo in tienda.articulos.all %}
-            <li>{{ articulo.titulo }} - ${{ articulo.precio }}</li>
-            <div>
-                <img src="{{ articulo.imagen.url }}" alt="{{ articulo.titulo }}" width="200">
-                <p>{{ articulo.descripcion }}</p>
-              <!--   <p>Publicado el: {{ articulo.fecha_publicacion }}</p> -->
-            </div>
-            {% if articulo.tienda.propietario == user %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{ articulo.titulo }}</h5>
+                    <p class="card-text">{{ articulo.descripcion|truncatechars:50 }}</p>
+                    <p class="card-text text-success">${{ articulo.precio }}</p>
+                    <img src="{{ articulo.imagen.url }}" alt="{{ articulo.titulo }}" width="200">
+                   </div>
+                {% if articulo.tienda.propietario == user %}
                 <!-- Botón para eliminar el artículo -->
+                <div class="card-button ">
                 <form action="{% url 'eliminar_articulo' articulo.id %}" method="post" style="display:inline;">
                     {% csrf_token %}
-                    <button type="submit" onclick="return confirm('¿Estás seguro de que deseas eliminar este artículo?');">Eliminar</button>
+                    <button class="btn btn-warning" type="submit" onclick="return confirm('¿Estás seguro de que deseas eliminar este artículo?');">Eliminar</button>
                 </form>
+            </div>
             {% endif %}
+            </div>
+        </div>
+            
+            
         {% endfor %}
+    </div>
     </ul>
 </div>
     {% if request.user == tienda.propietario %}
         <a href="{% url 'agregar_articulo' tienda_id=tienda.id %}">
-            <button>Agregar artículo</button>
+            <button class="btn btn-primary">Agregar artículo</button>
         </a>
     {% endif %}
 {% endblock %}

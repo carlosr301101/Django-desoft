@@ -29,9 +29,24 @@ def subir_articulo(request):
     return render(request, 'Mi_negocio/subir_articulo.html', {'form': form})
 
 #@login_required(login_url='login')
-def lista_articulos(request):
-    tiendas = Tienda.objects.all()
-    return render(request, 'Mi_negocio/lista_articulos.html', {'tiendas': tiendas})
+def lista_articulos(request): 
+    
+    productos = Articulo.objects.select_related('tienda').all().order_by('tienda')
+
+    
+    paginator = Paginator(productos, 6)
+    page_number = request.GET.get('page')  
+
+    try:
+        page_obj = paginator.get_page(page_number)
+    except PageNotAnInteger:
+        page_obj = paginator.get_page(1)
+    except EmptyPage:
+        page_obj = paginator.get_page(paginator.num_pages)
+
+    return render(request, 'Mi_negocio/lista_articulos.html', {
+        'page_obj': page_obj,
+    })
 
 
 @login_required

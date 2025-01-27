@@ -1,37 +1,53 @@
 {% extends "Mi_negocio/layout.html" %}
 {% block body %}
-    <h1>Lista de Artículos</h1>
-    {% if tiendas %}
-        <ul>
-            <div class="container mt-5">
-                <div class="row">
-            {% for tienda in tiendas %}
-            {%if tienda.articulos.all%}
-            <li>
-            <h1 class="link_tienda">
-               
-                <a href="{% url 'ver_tienda' tienda_id=tienda.id %}"> {{tienda.nombre}}</a>
-            </h1>
-            </li>
-            
-            {%for articulo in tienda.articulos.all%}
-            
-                <div>
-                    <h2>{{ articulo.titulo }}</h2>
-                    <img src="{{ articulo.imagen.url }}" alt="{{ articulo.titulo }}" width="200">
-                    <p>{{ articulo.descripcion }}</p>
-                    <p>{{articulo.precio}}$</p>
-                   <!--  <p>Publicado el: {{ articulo.fecha_publicacion }}</p> -->
-                </div>
-     
-            {% endfor %}
-            {%else%}
-            {%endif%}
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No hay artículos disponibles.</p>
-    {% endif %}
+<h2>Listado de Productos</h2>
+
+{% if page_obj %}
+    <p>Mostrando {{ page_obj.start_index }} - {{ page_obj.end_index }} de {{ page_obj.paginator.count }} productos.</p>
+    
+ <!-- Agrupar productos por tienda -->
+ {% regroup page_obj by tienda as tiendas %}
+ {% for tienda in tiendas %}
+     <div class="mb-4">
+         <!-- Nombre de la tienda -->
+         <h3><a href="{% url 'ver_tienda' tienda_id=tienda.grouper.id %}">{{ tienda.grouper.nombre }}</a></h3>
+         <!-- Grid de 3 columnas para los productos -->
+         <div class="row">
+             {% for articulo in tienda.list %}
+                 <div class="col-md-4 mb-4">
+                     <div class="card h-100">
+                         <div class="card-body">
+                             <h5 class="card-title">{{ articulo.titulo }}</h5>
+                             <p class="card-text">{{ articulo.descripcion|truncatechars:50 }}</p>
+                             <p class="card-text text-success">${{ articulo.precio }}</p>
+                             <img src="{{ articulo.imagen.url }}" alt="{{ articulo.titulo }}" width="200">
+                            </div>
+                     </div>
+                 </div>
+             {% endfor %}
+         </div>
+     </div>
+ {% endfor %}
+
+    <!-- Paginación -->
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; Primera</a>
+                <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+            {% endif %}
+
+            <span class="current">
+                Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">Siguiente</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">Última &raquo;</a>
+            {% endif %}
+        </span>
     </div>
-</div>
-{% endblock body%}
+{% else %}
+    <p>No hay productos disponibles.</p>
+{% endif %}
+{% endblock %}
