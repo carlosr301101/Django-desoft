@@ -34,8 +34,7 @@
         {% if user.is_authenticated %}
         <li style="padding-right: 25px; color: aliceblue;">{{ user.username }}</li>
         {%endif%}
-         <form action="{% url 'buscar_articulo' %} "  class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search" method="get">
-            <button type="submit"  class="btn btn-outline-secondary me-2" >Buscar_articulo</button>
+         
         
         </form> 
 
@@ -43,7 +42,10 @@
         
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
            
-           
+                <form action="{% url 'buscar_articulo' %} "   role="search" method="get">
+                    <button type="submit"  class="btn btn-outline-secondary me-2" >Buscar_articulo</button>
+                </form>
+                    
                 <form action="{% url 'login' %}" method="post">
                     {% csrf_token %}
                 <button type="submit"  class="btn btn-outline-light me-2" >Login</button>

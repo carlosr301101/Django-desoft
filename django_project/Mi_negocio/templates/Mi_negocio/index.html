@@ -4,22 +4,39 @@
 
 {% block body %}
 <ul class="container">
-<div>
-    <a href="{% url 'listar_tiendas'%}">Ver Tiendas</a>
+    {% if user.is_authenticated %}
+    <h1>
+    Hola {{ user.username }}!
+    </h1>
+    {% else %}
+    <p>No esta logueado</p>
+    
+    {% endif %}
+<div class="item">
+    <button class="btn btn-secondary">
+    <a href="{% url 'listar_tiendas'%}" style="text-decoration: none; color: inherit;">Ver Tiendas</a>
+    </button>
 </div>
-<div>
-    <a href="{% url 'lista_articulos'%}">Lista_articulos</a>
-</div>
-</ul>
-{% if user.is_authenticated %}
-<h1>
-Hola {{ user.username }}!
-</h1>
-<div>
-    <a href="{% url 'crear_tienda'%}">Crear Tienda</a>
-</div>
-{% else %}
-<p>No esta logueado</p>
+<p>
 
-{% endif %}
+</p>
+
+<div class="item">
+    <button class="btn btn-secondary">
+    <a href="{% url 'lista_articulos'%}" style="text-decoration: none; color: inherit;">Lista_articulos</a>
+</button>
+</div>
+<p>
+    
+</p>
+{% if user.is_authenticated %}
+<div class="item">
+<button class="btn btn-primary">
+<div>
+    <a href="{% url 'crear_tienda'%}" style="text-decoration: none; color: inherit;">Crear Tienda</a>
+</div>
+</button>
+</div>
+{%endif%}
+</ul>
 {% endblock body%}
