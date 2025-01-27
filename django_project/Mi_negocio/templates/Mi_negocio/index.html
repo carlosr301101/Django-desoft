@@ -20,9 +20,6 @@ Hola {{ user.username }}!
 </div>
 {% else %}
 <p>No esta logueado</p>
-<div>
-<a href="{% url 'login' %}">Log In</a>
-</div>
-<div><a href="{% url 'signup' %}">Signup</a></div>
+
 {% endif %}
 {% endblock body%}

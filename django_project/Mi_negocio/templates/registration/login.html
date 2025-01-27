@@ -5,6 +5,14 @@
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+    
+        <div class="container mt-4">
+            <div class="d-flex">
+                <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+                <a href="{%url 'signup' %}">
+                <button type="button" class="btn btn-secondary">Sign up</button>
+                </a>
+            </div>
+        </div>
 </form>
 {% endblock body%}

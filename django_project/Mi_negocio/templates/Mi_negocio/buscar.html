@@ -1,0 +1,51 @@
+{% extends 'Mi_negocio/layout.html' %}
+
+{% block body %}
+
+<h2>Buscar Productos</h2>
+<form method="get">
+    <input type="text" name="termino" value="{{ termino_busqueda }}" placeholder="Ej: Camisetas">
+    <button type="submit">Buscar</button>
+</form>
+
+{% if page_obj %}
+    <h3>Resultados ({{ page_obj.paginator.count }} tiendas encontradas):</h3>
+    {% for tienda, productos in page_obj %}
+        <div class="tienda">
+            <h4>
+                <a href="{% url 'ver_tienda' tienda_id=tienda.id %}">{{ tienda.nombre }}</a>
+            </h4>
+            <ul>
+                {% for producto in productos %}
+                    <li>
+                        {{ producto.titulo }} - 
+                        {{ producto.descripcion|truncatechars:50 }} - 
+                        ${{ producto.precio }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+
+    <!-- Paginación -->
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1&termino={{ termino_busqueda }}">&laquo; Primera</a>
+                <a href="?page={{ page_obj.previous_page_number }}&termino={{ termino_busqueda }}">Anterior</a>
+            {% endif %}
+
+            <span class="current">
+                Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}&termino={{ termino_busqueda }}">Siguiente</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}&termino={{ termino_busqueda }}">Última &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+{% else %}
+    <p>No se encontraron resultados.</p>
+{% endif %}
+{% endblock %}

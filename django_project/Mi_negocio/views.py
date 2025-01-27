@@ -1,13 +1,14 @@
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import HttpResponseRedirect, HttpRequest
 from django.shortcuts import render, redirect , get_object_or_404
-from .forms import ArticuloForm, TiendaForm
+from .forms import ArticuloForm, TiendaForm, BusquedaForm
 from .models import Articulo,Tienda
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import \
 login_required
+from django.db.models import Q
 
 # Create your views here.
-
 def index(request):
     return render(request,"Mi_negocio/index.html")
 
@@ -31,6 +32,7 @@ def subir_articulo(request):
 def lista_articulos(request):
     tiendas = Tienda.objects.all()
     return render(request, 'Mi_negocio/lista_articulos.html', {'tiendas': tiendas})
+
 
 @login_required
 def eliminar_articulo(request, articulo_id):
@@ -78,3 +80,41 @@ def agregar_articulo(request, tienda_id):
 def ver_tienda(request, tienda_id):
     tienda = Tienda.objects.get(id=tienda_id)
     return render(request, 'Mi_negocio/ver_tienda.html', {'tienda': tienda})
+
+
+def buscar_articulos(request):
+        form = BusquedaForm(request.GET or None)
+        resultados_tiendas = []  # Lista de tuplas (tienda, productos)
+
+        if form.is_valid():
+            termino = form.cleaned_data['termino']
+            
+            productos = Articulo.objects.filter(
+                Q(titulo__icontains=termino) | Q(descripcion__icontains=termino)
+            )
+            
+            tiendas = Tienda.objects.filter(
+                articulos__in=productos
+            ).distinct().order_by('nombre')
+
+           
+            for tienda in tiendas:
+                productos_tienda = productos.filter(tienda=tienda)
+                resultados_tiendas.append((tienda, productos_tienda))
+
+    
+        paginator = Paginator(resultados_tiendas, 6)
+        page_number = request.GET.get('page')  
+
+        try:
+            page_obj = paginator.get_page(page_number)
+        except PageNotAnInteger:
+            page_obj = paginator.get_page(1)
+        except EmptyPage:
+            page_obj = paginator.get_page(paginator.num_pages)
+
+        return render(request, 'Mi_negocio/buscar.html', {
+        'form': form,
+        'page_obj': page_obj,
+        'termino_busqueda': request.GET.get('termino', '')  # Para mantener el término en la paginación
+    })
