@@ -1,6 +1,6 @@
 {% extends "Mi_negocio/layout.html" %}
 {% block body %}
-
+<div class="content">
 <h1>Iniciar sesión</h1>
 <form method="post">
     {% csrf_token %}
@@ -8,11 +8,12 @@
     
         <div class="container mt-4">
             <div class="d-flex">
-                <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+                <button type="submit" class="btn btn-primary" style="margin-right: 10px;">Iniciar sesión</button>
                 <a href="{%url 'signup' %}">
                 <button type="button" class="btn btn-secondary">Sign up</button>
                 </a>
             </div>
         </div>
 </form>
+</div>
 {% endblock body%}

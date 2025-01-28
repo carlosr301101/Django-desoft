@@ -1,12 +1,14 @@
 {% extends 'Mi_negocio/layout.html' %}
 
 {% block body %}
+<div class="content">
     <h2>Agregar artículo a {{ tienda.nombre }}</h2>
     <div>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Agregar artículo</button>
+        <button type="submit" class="btn btn-primary">Agregar artículo</button>
     </form>
+</div>
 </div>
 {% endblock %}

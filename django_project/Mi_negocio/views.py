@@ -14,9 +14,21 @@ def index(request):
 
 def listar_tiendas(request):
     tiendas = Tienda.objects.all()  
-    return render(request, 'Mi_negocio/listar_tiendas.html', {'tiendas': tiendas, 'cantidad':tiendas.count })
+    
+    paginator= Paginator(tiendas,10)
+    page_number = request.GET.get('page')
+    try:
+        page_obj = paginator.get_page(page_number)
+    except PageNotAnInteger:
+        page_obj = paginator.get_page(1)
+    except EmptyPage:
+        page_obj = paginator.get_page(paginator.num_pages)
 
+    return render(request, 'Mi_negocio/listar_tiendas.html', {
+        'page_obj': page_obj,
+        'cantidad':tiendas.count })
 
+""" 
 @login_required(login_url='login')
 def subir_articulo(request):
     if request.method == 'POST':
@@ -27,8 +39,10 @@ def subir_articulo(request):
     else:
         form = ArticuloForm()
     return render(request, 'Mi_negocio/subir_articulo.html', {'form': form})
+ """
 
-#@login_required(login_url='login')
+
+# @login_required(login_url='login')
 def lista_articulos(request): 
     
     productos = Articulo.objects.select_related('tienda').all().order_by('tienda')

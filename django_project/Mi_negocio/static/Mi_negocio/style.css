@@ -12,7 +12,7 @@ header {
     top: 0;          /* Lo coloca en la parte superior */
     left: 0;         /* Lo alinea a la izquierda */
     width: 100%;     /* Ocupa el ancho completo de la página */
-    background-color: #333; /* Color de fondo */
+    background-color: #233752; /* Color de fondo */
     color: white;    /* Color del texto */
     padding: 10px 0; /* Espaciado interno */
     z-index: 1000;   /* Asegura que el header esté por encima de otros elementos */
@@ -24,10 +24,29 @@ h1.link_tienda  a{
     text-decoration:underline;
 }
 body {
+     background: linear-gradient(190deg, #cedcf7, #e3edf7); 
+   /*  background-attachment: fixed; */
     margin: 0;
+   /*  height: 100vh; */
     font-family: Arial, sans-serif;
+    color: white;
+}
+.btn{
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+.card-body{
+    border-color: transparent;
+ /*    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); */
+    
+}
+.enlace-negro {
+    color: rgba(12, 13, 21, 0.674); /* Color normal */
+    text-decoration: none; /* Quita el subrayado */
 }
 
+.enlace-negro:hover {
+    color: rgb(21, 1, 1); /* Color al pasar el mouse */
+}
 /* Header fijo 
 .fixed-header {
     position: fixed;
@@ -82,6 +101,6 @@ body {
 footer {
     text-align: center;
     padding: 10px;
-    background-color: #333;
+    background-color: #233752;
     color: white;
 }

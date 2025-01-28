@@ -1,7 +1,7 @@
 {% extends 'Mi_negocio/layout.html' %}
 
 {% block body %}
-
+<div class="content">
 <h2>Buscar Productos</h2>
 <form method="get">
     <input type="text" name="termino" value="{{ termino_busqueda }}" placeholder="Ej: Camisetas">
@@ -12,9 +12,13 @@
     <h3>Resultados ({{ page_obj.paginator.count }} tiendas encontradas):</h3>
     {% for tienda, productos in page_obj %}
         <div class="tienda">
+            <button class="btn btn-secondary" style="margin-bottom: 10px;">
             <h4>
-                <a href="{% url 'ver_tienda' tienda_id=tienda.id %}">{{ tienda.nombre }}</a>
+               
+                <a class="enlace-negro" href="{% url 'ver_tienda' tienda_id=tienda.id %}">{{ tienda.nombre }}</a>
+                
             </h4>
+            </button>
             <ul>
                 {% for producto in productos %}
                     <li>
@@ -48,4 +52,5 @@
 {% else %}
     <p>No se encontraron resultados.</p>
 {% endif %}
+</div>
 {% endblock %}

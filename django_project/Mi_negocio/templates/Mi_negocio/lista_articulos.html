@@ -1,5 +1,6 @@
 {% extends "Mi_negocio/layout.html" %}
 {% block body %}
+<div class="content">
 <h2>Listado de Productos</h2>
 
 {% if page_obj %}
@@ -10,16 +11,22 @@
  {% for tienda in tiendas %}
      <div class="mb-4">
          <!-- Nombre de la tienda -->
-         <h3><a href="{% url 'ver_tienda' tienda_id=tienda.grouper.id %}">{{ tienda.grouper.nombre }}</a></h3>
-         <!-- Grid de 3 columnas para los productos -->
+         <button class="btn btn-outline-secondary me-2">
+         <h3>
+           
+            <a class="enlace-negro" href="{% url 'ver_tienda' tienda_id=tienda.grouper.id %}">{{ tienda.grouper.nombre }}</a>
+        
+        </h3>
+    </button>
+        <!-- Grid de 3 columnas para los productos -->
          <div class="row">
              {% for articulo in tienda.list %}
                  <div class="col-md-4 mb-4">
-                     <div class="card h-100">
+                     <div>
                          <div class="card-body">
                              <h5 class="card-title">{{ articulo.titulo }}</h5>
                              <p class="card-text">{{ articulo.descripcion|truncatechars:50 }}</p>
-                             <p class="card-text text-success">${{ articulo.precio }}</p>
+                             <p class="card-text">${{ articulo.precio }}</p>
                              <img src="{{ articulo.imagen.url }}" alt="{{ articulo.titulo }}" width="200">
                             </div>
                      </div>
@@ -50,4 +57,5 @@
 {% else %}
     <p>No hay productos disponibles.</p>
 {% endif %}
+</div>
 {% endblock %}

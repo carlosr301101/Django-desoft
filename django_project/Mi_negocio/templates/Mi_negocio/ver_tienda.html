@@ -2,7 +2,7 @@
 
 {% block body %}
 <div class="row">
-<div class="card h-100">
+<div class="content">
     <h2 >{{ tienda.nombre }}</h2>
     <p>Dirección: {{ tienda.direccion }}</p>
     <p> Correo: <a href="mailto:{{ tienda.correo }}?subject=Consulta tienda {{ tienda.nombre }}" >{{ tienda.correo }}</a>
@@ -19,11 +19,11 @@
         <div class="row">
         {% for articulo in page_obj %}
         <div class="col-md-4 mb-4">
-            <div class="card h-100">
+            <div >
                 <div class="card-body">
                     <h5 class="card-title">{{ articulo.titulo }}</h5>
                     <p class="card-text">{{ articulo.descripcion|truncatechars:50 }}</p>
-                    <p class="card-text text-success">${{ articulo.precio }}</p>
+                    <p class="card-text">${{ articulo.precio }}</p>
                     <img src="{{ articulo.imagen.url }}" alt="{{ articulo.titulo }}" width="200">
                    </div>
                 {% if articulo.tienda.propietario == user %}

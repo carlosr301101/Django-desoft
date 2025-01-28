@@ -1,17 +1,41 @@
 {% extends 'Mi_negocio/layout.html' %}
 
 {% block body %}
+
     <h2>Lista de tiendas</h2>
     <p>Contamos con {{cantidad}} tiendas</p>
     <ul>
-        {% for tienda in tiendas %}
-            <li>
-                <a href="{% url 'ver_tienda' tienda_id=tienda.id %}">{{ tienda.nombre }}</a>
+    
+        {% for tienda in page_obj %}
+            <li style="margin-top: 20px;">
+                <button class="btn btn-secondary">
+                <a class="enlace-negro" href="{% url 'ver_tienda' tienda_id=tienda.id %}">{{ tienda.nombre }}</a>
                 <!-- Botón para acceder a los artículos de la tienda 
                 <a href="{% url 'ver_tienda' tienda_id=tienda.id %}">Ver artículos</a> 
                 -->
+                </button>
                 
             </li>
         {% endfor %}
     </ul>
+
+
+    <!-- Paginación -->
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; Primera</a>
+                <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+            {% endif %}
+
+            <span class="current">
+                Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">Siguiente</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">Última &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
 {% endblock %}
