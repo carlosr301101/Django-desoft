@@ -1,9 +1,15 @@
 {% extends 'Mi_negocio/layout.html' %}
 
 {% block body %}
-<div class="content">
-    <h2>Agregar artículo a {{ tienda.nombre }}</h2>
-    <div>
+    <div class="container mt-5">
+        <div class="row ">
+          <div class="col-md-8">
+            <div class="card shadow">
+              <div class="card-header bg-primary text-white">
+                  <h2>Agregar artículo a {{ tienda.nombre }}</h2>
+                
+              </div>
+              <div class="card-body">
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
@@ -11,4 +17,7 @@
     </form>
 </div>
 </div>
+</div>
+</div>
+<p></p>
 {% endblock %}
