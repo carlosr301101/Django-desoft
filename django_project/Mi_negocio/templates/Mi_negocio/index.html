@@ -14,17 +14,17 @@
     
     {% endif %}
 <div class="item">
-    <button class="btn btn-secondary">
-    <a href="{% url 'listar_tiendas'%}" style="text-decoration: none; color: inherit;">Ver Tiendas</a>
-    </button>
+    
+    <a href="{% url 'listar_tiendas'%}" style="text-decoration: none; color: inherit;"><button class="btn btn-secondary"><div class="enlace-negro">Ver Tiendas</div></button></a>
+    
 </div>
 <p>
 
 </p>
 
 <div class="item">
-    <button class="btn btn-secondary">
-    <a href="{% url 'lista_articulos'%}" style="text-decoration: none; color: inherit;">Lista articulos</a>
+   
+    <a href="{% url 'lista_articulos'%}" style="text-decoration: none; color: inherit;"> <button class="btn btn-secondary"><div class="enlace-negro">Lista articulos</div></button></a>
 </button>
 </div>
 <p>
@@ -32,9 +32,9 @@
 </p>
 {% if user.is_authenticated %}
 <div class="item">
-<button class="btn btn-primary">
+
 <div>
-    <a href="{% url 'crear_tienda'%}" style="text-decoration: none; color: inherit;">Crear Tienda</a>
+    <a href="{% url 'crear_tienda'%}" style="text-decoration: none; color: inherit;"><button class="btn btn-primary"><div class="enlace-negro">Crear Tienda</div></button></a>
 </div>
 </button>
 </div>

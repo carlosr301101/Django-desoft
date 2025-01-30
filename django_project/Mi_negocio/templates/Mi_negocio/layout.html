@@ -43,14 +43,18 @@
         
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
            
-                <form action="{% url 'buscar_articulo' %} "   role="search" method="get">
+                <a class="enlace-negro" href="{%url 'buscar_articulo' %}">
+                <!-- <form action="{% url 'buscar_articulo' %} "   role="search" method="get"> -->
                     <button type="submit"  class="btn btn-outline-secondary me-2" >Buscar_articulo</button>
-                </form>
-                    
-                <form action="{% url 'login' %}" method="post">
+               <!--  </form> -->
+                </a>
+
+                <a class="enlace-negro" href="{%url 'login' %}">
+                <!-- <form action="{% url 'login' %}" method="post"> -->
                     {% csrf_token %}
                 <button type="submit"  class="btn btn-outline-light me-2" >Login</button>
-                </form>
+               <!--  </form> -->
+             </a>
           
             
         
