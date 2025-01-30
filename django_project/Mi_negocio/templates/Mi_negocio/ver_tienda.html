@@ -43,13 +43,14 @@
     </div>
     </ul>
 </div>
+    {%endif%}
     {% if request.user == tienda.propietario %}
         <a href="{% url 'agregar_articulo' tienda_id=tienda.id %}">
             <button class="btn btn-primary">Agregar artículo</button>
         </a>
     {% endif %}
-
-
+        
+    {% if page_obj %}
     <!-- Paginación -->
     <nav aria-label="Page navigation">
         <ul class="pagination justify-content-center">
