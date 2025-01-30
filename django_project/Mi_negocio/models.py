@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 import os
 from django.conf import settings
-
+from django.utils.text import slugify
 # Create your models here.
 class Tienda(models.Model):
    # id=models.BigAutoField(auto_created=True, primary_key=True, serialize=False)
@@ -15,6 +15,10 @@ class Tienda(models.Model):
     def __str__(self):
         return self.nombre
 
+def upload_to_articulos(instance, filename):
+    # Genera la ruta: articulos/nombre_de_la_tienda/filename
+    nombre_tienda = slugify(instance.tienda.nombre)
+    return os.path.join('articulos', f"{nombre_tienda}_{str(instance.tienda.id)}", filename)
 
 
 class Articulo(models.Model):
@@ -24,7 +28,7 @@ class Articulo(models.Model):
     titulo = models.CharField(max_length=200)
     descripcion = models.TextField()
     precio = models.DecimalField(max_digits=10, decimal_places=2)
-    imagen = models.ImageField(upload_to='articulos/')
+    imagen = models.ImageField(upload_to=upload_to_articulos)
     fecha_publicacion = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
