@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import \
 login_required
 from django.db.models import Q
 
+
 # Create your views here.
 def index(request):
     return render(request,"Mi_negocio/index.html")
@@ -82,6 +83,7 @@ def crear_tienda(request):
             tienda = tienda_form.save(commit=False)
             tienda.propietario = request.user
             tienda.save()
+            
             return redirect('ver_tienda', tienda_id=tienda.id)
     else:
         tienda_form = TiendaForm()
