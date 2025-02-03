@@ -1,6 +1,6 @@
 {% extends "Mi_negocio/layout.html" %}
 {% block body %}
-<div class="content">
+<div class="content no-bg container-flex" >
 <h2>Listado de Productos</h2>
 
 {% if page_obj %}
@@ -37,7 +37,7 @@
  {% endfor %}
 
     <!-- Paginación -->
-    <div class="pagination">
+    <div class="pagination ">
         <span class="step-links">
             {% if page_obj.has_previous %}
                 <a href="?page=1">&laquo; Primera</a>

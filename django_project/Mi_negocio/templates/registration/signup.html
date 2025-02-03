@@ -1,20 +1,13 @@
-{% extends "Mi_negocio/layout.html" %}
-
-{% block title %}Sign Up{% endblock %}
-
-{% block body %}
-<div class="content">
-
+{% extends "Mi_negocio/layout.html" %} {% block title %}Sign Up{% endblock %} {%
+block body %}
+<div class="content blanco">
   <h2>Sign up</h2>
 
-
   <div class="d-flex">
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p}}
-  <button type="submit" class="btn btn-primary">Sign Up</button>
-</form>
-
-</div>
+    <form method="post">
+      {% csrf_token %} {{ form.as_p}}
+      <button type="submit" class="btn btn-primary">Sign Up</button>
+    </form>
+  </div>
 </div>
 {% endblock body%}

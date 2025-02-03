@@ -1,6 +1,7 @@
 {% extends 'Mi_negocio/layout.html' %}
 
 {% block body %}
+<div class="no-bg">
 <div class="row">
 <div class="content">
     <h2 >{{ tienda.nombre }}</h2>
@@ -90,5 +91,5 @@
     {% else %}
     <p>No hay productos disponibles en esta tienda.</p>
 {% endif %}
-
+</div>
 {% endblock %}

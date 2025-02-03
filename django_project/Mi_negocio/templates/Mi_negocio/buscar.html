@@ -1,56 +1,69 @@
-{% extends 'Mi_negocio/layout.html' %}
-
-{% block body %}
-<div class="content">
-<h2>Buscar Productos</h2>
-<form method="get">
-    <input type="text" name="termino" value="{{ termino_busqueda }}" placeholder="Ej: Camisetas">
+{% extends 'Mi_negocio/layout.html' %} {% block body %}
+<div class="content blanco">
+  <h2>Buscar Productos</h2>
+  <form method="get">
+    <input
+      type="text"
+      name="termino"
+      value="{{ termino_busqueda }}"
+      placeholder="Ej: Camisetas"
+    />
     <button type="submit" class="btn btn-secondary me-2">Buscar</button>
-</form>
+  </form>
 
-{% if page_obj %}
-    <h3>Resultados ({{ page_obj.paginator.count }} tiendas encontradas):</h3>
-    {% for tienda, productos in page_obj %}
-        <div class="tienda">
-            <button class="btn btn-secondary" style="margin-bottom: 10px;">
-            <h4>
-               
-                <a class="enlace-negro" href="{% url 'ver_tienda' tienda_id=tienda.id %}">{{ tienda.nombre }}</a>
-                
-            </h4>
-            </button>
-            <ul>
-                {% for producto in productos %}
-                    <li>
-                        {{ producto.titulo }} - 
-                        {{ producto.descripcion|truncatechars:50 }} - 
-                        ${{ producto.precio }}
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
-    {% endfor %}
+  {% if page_obj %}
+  <h3>Resultados ({{ page_obj.paginator.count }} tiendas encontradas):</h3>
+  {% for tienda, productos in page_obj %}
+  <div class="tienda">
+    <button class="btn btn-secondary" style="margin-bottom: 10px">
+      <h4>
+        <a
+          class="enlace-negro"
+          href="{% url 'ver_tienda' tienda_id=tienda.id %}"
+          >{{ tienda.nombre }}</a
+        >
+      </h4>
+    </button>
+    <ul>
+      {% for producto in productos %}
+      <li>
+        {{ producto.titulo }} - {{ producto.descripcion|truncatechars:50 }} -
+        ${{ producto.precio }}
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endfor %}
 
-    <!-- Paginación -->
-    <div class="pagination">
-        <span class="step-links">
-            {% if page_obj.has_previous %}
-                <a href="?page=1&termino={{ termino_busqueda }}">&laquo; Primera</a>
-                <a href="?page={{ page_obj.previous_page_number }}&termino={{ termino_busqueda }}">Anterior</a>
-            {% endif %}
+  <!-- Paginación -->
+  <div class="pagination">
+    <span class="step-links">
+      {% if page_obj.has_previous %}
+      <a href="?page=1&termino={{ termino_busqueda }}">&laquo; Primera</a>
+      <a
+        href="?page={{ page_obj.previous_page_number }}&termino={{ termino_busqueda }}"
+        >Anterior</a
+      >
+      {% endif %}
 
-            <span class="current">
-                Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
-            </span>
+      <span class="current">
+        Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+      </span>
 
-            {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}&termino={{ termino_busqueda }}">Siguiente</a>
-                <a href="?page={{ page_obj.paginator.num_pages }}&termino={{ termino_busqueda }}">Última &raquo;</a>
-            {% endif %}
-        </span>
-    </div>
-{% else %}
-    <p>No se encontraron resultados.</p>
-{% endif %}
+      {% if page_obj.has_next %}
+      <a
+        href="?page={{ page_obj.next_page_number }}&termino={{ termino_busqueda }}"
+        >Siguiente</a
+      >
+      <a
+        href="?page={{ page_obj.paginator.num_pages }}&termino={{ termino_busqueda }}"
+        >Última &raquo;</a
+      >
+      {% endif %}
+    </span>
+  </div>
+  {% else %}
+  <p>No se encontraron resultados.</p>
+  {% endif %}
 </div>
 {% endblock %}

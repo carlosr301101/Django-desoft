@@ -3,6 +3,10 @@ from django.contrib.auth.models import User
 import os
 from django.conf import settings
 from django.utils.text import slugify
+from io import BytesIO
+from PIL import Image
+from django.core.files.base import ContentFile
+
 # Create your models here.
 class Tienda(models.Model):
    # id=models.BigAutoField(auto_created=True, primary_key=True, serialize=False)
@@ -34,13 +38,38 @@ class Articulo(models.Model):
     def __str__(self):
         return self.titulo
     
+
+
+    def compress_image(self, image):
+        """
+        Comprime la imagen utilizando Pillow.
+        """
+        img = Image.open(image)
+        if img.mode != 'RGB':
+            img = img.convert('RGB')
+
+        output = BytesIO()
+
+        
+        img.save(output, format='JPEG', quality=60)  
+        output.seek(0)
+
+        return ContentFile(output.read(), name=image.name)
+    
+    def save(self, *args, **kwargs):
+        """
+        Sobrescribe el método save() para comprimir la imagen antes de guardarla.
+        """
+        if self.imagen:
+            self.imagen = self.compress_image(self.imagen)
+
+        super().save(*args, **kwargs)
+    
     def delete(self, *args, **kwargs):
-        # Borra la imagen del sistema de archivos
         if self.imagen:
             ruta_imagen = os.path.join(settings.MEDIA_ROOT, self.imagen.name)
             if os.path.exists(ruta_imagen):
                 os.remove(ruta_imagen)
-        
-        # Llama al método delete() de la clase padre para borrar el artículo
+
         super().delete(*args, **kwargs)
 

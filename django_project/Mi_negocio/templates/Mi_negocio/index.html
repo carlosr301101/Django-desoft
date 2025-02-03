@@ -4,13 +4,13 @@
 
 {% block body %}
 
-<ul class="content">
+<ul class="content blanco container-flex">
     {% if user.is_authenticated %}
     <h1>
     Hola {{ user.username }}!
     </h1>
     {% else %}
-    <h1 style="color: black;">No esta logueado</h1>
+    <h1 class="blanco">No esta logueado</h1>
     
     {% endif %}
 <div class="item">
