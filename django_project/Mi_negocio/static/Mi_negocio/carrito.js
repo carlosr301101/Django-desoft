@@ -112,16 +112,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  document.getElementById("buyCart").addEventListener("click", function () {
-    if (
-      confirm(
-        "Recuerda enviarle la factura en foma de pdf al propietario de la tienda"
-      )
-    ) {
-      updateCartUI();
-    }
-  });
-
   // Inicializa la interfaz del carrito
   updateCartUI();
 });
