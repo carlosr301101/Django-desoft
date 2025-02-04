@@ -112,6 +112,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+  document.getElementById("qrButton").addEventListener("click", function () {
+    alert("Comparte este Código QR que contiene el link de tu tienda");
+  });
+
   // Inicializa la interfaz del carrito
   updateCartUI();
 });

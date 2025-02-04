@@ -113,9 +113,22 @@
     </ul>
   </div>
   {%endif%} {% if request.user == tienda.propietario %}
-  <a href="{% url 'agregar_articulo' tienda_id=tienda.id %}">
-    <button class="btn btn-primary">Agregar artículo</button>
-  </a>
+  <div class="row">
+    <ul
+      class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
+    >
+      <li style="margin-left: 25px">
+        <a href="{% url 'agregar_articulo' tienda_id=tienda.id %}">
+          <button class="btn btn-primary">Agregar artículo</button>
+        </a>
+      </li>
+      <li style="margin-left: 15px">
+        <a id="qrButton" href="{% url 'generar_qr' tienda_id=tienda.id %}">
+          <button class="btn btn-primary">Generar QR</button>
+        </a>
+      </li>
+    </ul>
+  </div>
   {% endif %} {% if page_obj %}
   <!-- Paginación -->
   <nav aria-label="Page navigation">

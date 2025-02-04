@@ -14,8 +14,9 @@ import os
 import requests
 from datetime import datetime
 from django.utils.text import slugify
-
-
+import qrcode
+import requests
+import json
 # Create your views here.
 def index(request):
     return render(request,"Mi_negocio/index.html")
@@ -190,7 +191,36 @@ def send_pdf_to_whatsapp(tienda,time_format):
 
     return url
 
+def generate_qr(request,tienda_id):
+    # URL de tu tienda
+    tienda = Tienda.objects.get(id=tienda_id)
+    url_tienda = f"https://minegocio.pythonanywhere.com/Mi_negocio/ver_tienda/{tienda_id}"
+   # print (request)
+  
+    qr = qrcode.QRCode(
+        version=1,
+        error_correction=qrcode.constants.ERROR_CORRECT_L,
+        box_size=10,
+        border=4,
+    )
+    qr.add_data(url_tienda)
+    qr.make(fit=True)
 
+    # Crear una imagen del código QR
+    img = qr.make_image(fill_color="black", back_color="white")
+    
+
+    # Guardar la imagen en un buffer
+    buffer = BytesIO()
+    img.save(buffer, format="PNG")
+    buffer.seek(0)
+
+    # Devolver la imagen como respuesta HTTP
+    response = HttpResponse(content_type="image/png")
+    response["Content-Disposition"] = f'attachment; filename="tienda_{tienda.nombre}.png"'
+    response.write(buffer.getvalue())
+
+    return response
 
 
 def generate_pdf(request,tienda_id):
