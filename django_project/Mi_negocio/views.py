@@ -176,7 +176,7 @@ def send_pdf_to_whatsapp(tienda,time_format):
     #minegocio.pythonanywhere.com
     nombre=slugify(tienda.nombre)
     pdf_file_path = os.path.join('media', 'facturas',nombre, f'factura_{time_format}.pdf')
-    pdf_url = f"http://minegocio.pythonanywhere.com{pdf_file_path}"
+    pdf_url = f"http://minegocio.pythonanywhere.com/{pdf_file_path}"
 
     # Enviar el enlace al WhatsApp del dueño
     #55246437
