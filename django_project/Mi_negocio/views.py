@@ -172,9 +172,11 @@ def buscar_articulos(request):
     })
 
 
-def send_pdf_to_whatsapp(pdf_file_path,tienda,time_fomat):
+def send_pdf_to_whatsapp(tienda,time_format):
     #minegocio.pythonanywhere.com
-    pdf_url = f"http://minegocio.pythonanywhere.com/{pdf_file_path}"
+    nombre=slugify(tienda.nombre)
+    pdf_file_path = os.path.join('media', 'facturas',nombre, f'factura_{time_format}.pdf')
+    pdf_url = f"http://minegocio.pythonanywhere.com{pdf_file_path}"
 
     # Enviar el enlace al WhatsApp del dueño
     #55246437
@@ -263,4 +265,4 @@ def generate_pdf(request,tienda_id):
         response = HttpResponse(content_type='application/pdf')
         response['Content-Disposition'] = f'attachment; filename="factura_{time_format}.pdf"'
         response.write(pdf)
-        return HttpResponseRedirect(send_pdf_to_whatsapp(pdf_file_path,tienda,time_format))
+        return HttpResponseRedirect(send_pdf_to_whatsapp(tienda,time_format))
