@@ -194,6 +194,7 @@ def send_pdf_to_whatsapp(tienda,time_format):
 
 
 def generate_pdf(request,tienda_id):
+    
     tienda = Tienda.objects.get(id=tienda_id)
     nombre=slugify(tienda.nombre)
     if request.method == 'POST':
