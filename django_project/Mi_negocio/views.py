@@ -180,8 +180,8 @@ def send_pdf_to_whatsapp(tienda,time_format):
 
     # Enviar el enlace al WhatsApp del dueño
     #55246437
-    url=f"https://api.whatsapp.com/send?phone={tienda.telefono}?text=Aquí%20está%20la%20factura:%20{pdf_url}"
-    #url = f"https://api.whatsapp.com/send?phone={tienda.telefono}&text=Aquí%20está%20la%20factura:%20{pdf_url}"
+    #url=f"https://api.whatsapp.com/send?phone={tienda.telefono}?text=Aquí%20está%20la%20factura:%20{pdf_url}"
+    url = f"https://wa.me/{tienda.telefono}?text=Hola%20aquí%20está%20la%20factura:{pdf_url}"
     #response = requests.get(url)
     #if response.status_code == 200:
     #    print("Enlace enviado correctamente.")
