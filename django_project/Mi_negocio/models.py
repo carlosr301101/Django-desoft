@@ -22,6 +22,7 @@ class Tienda(models.Model):
 def upload_to_articulos(instance, filename):
     # Genera la ruta: articulos/nombre_de_la_tienda/filename
     nombre_tienda = slugify(instance.tienda.nombre)
+    
     return os.path.join('articulos', f"{nombre_tienda}_{str(instance.tienda.id)}", filename)
 
 

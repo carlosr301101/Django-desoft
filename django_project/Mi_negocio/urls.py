@@ -10,7 +10,7 @@ urlpatterns=[
     path('', views.index, name='index'),
    # path('subir/', views.subir_articulo, name='subir_articulo'),
     path('articulos/', views.lista_articulos, name='lista_articulos'),
-
+    path('generate-pdf/<int:tienda_id>/', views.generate_pdf, name='generate_pdf'),
     path('buscar/', views.buscar_articulos, name='buscar_articulo'),
     path('listar_tiendas/', views.listar_tiendas, name='listar_tiendas'),
     path('crear_tienda/', views.crear_tienda, name='crear_tienda'),

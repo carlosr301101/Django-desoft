@@ -1,61 +1,70 @@
-{% extends "Mi_negocio/layout.html" %}
-{% block body %}
-<div class="content no-bg container-flex" >
-<h2>Listado de Productos</h2>
+{% extends "Mi_negocio/layout.html" %} {% block body %}
+<div class="content no-bg container-flex">
+  <h2>Listado de Productos</h2>
 
-{% if page_obj %}
-    <p>Mostrando {{ page_obj.start_index }} - {{ page_obj.end_index }} de {{ page_obj.paginator.count }} productos.</p>
-    
- <!-- Agrupar productos por tienda -->
- {% regroup page_obj by tienda as tiendas %}
- {% for tienda in tiendas %}
-     <div class="mb-4">
-         <!-- Nombre de la tienda -->
-         <button class="btn btn-outline-secondary me-2">
-         <h3>
-           
-            <a class="enlace-negro" href="{% url 'ver_tienda' tienda_id=tienda.grouper.id %}">{{ tienda.grouper.nombre }}</a>
-        
-        </h3>
+  {% if page_obj %}
+  <p>
+    Mostrando {{ page_obj.start_index }} - {{ page_obj.end_index }} de {{
+    page_obj.paginator.count }} productos.
+  </p>
+
+  <!-- Agrupar productos por tienda -->
+  {% regroup page_obj by tienda as tiendas %} {% for tienda in tiendas %}
+  <div class="mb-4">
+    <!-- Nombre de la tienda -->
+    <button class="btn btn-outline-secondary me-2">
+      <h3>
+        <a
+          class="enlace-negro"
+          href="{% url 'ver_tienda' tienda_id=tienda.grouper.id %}"
+          >{{ tienda.grouper.nombre }}</a
+        >
+      </h3>
     </button>
-        <!-- Grid de 3 columnas para los productos -->
-         <div class="row">
-             {% for articulo in tienda.list %}
-                 <div class="col-md-4 mb-4">
-                     <div>
-                         <div class="card-body">
-                             <h5 class="card-title">{{ articulo.titulo }}</h5>
-                             <p class="card-text">{{ articulo.descripcion|truncatechars:50 }}</p>
-                             <p class="card-text">${{ articulo.precio }}</p>
-                             <img src="{{ articulo.imagen.url }}" alt="{{ articulo.titulo }}" width="200">
-                            </div>
-                     </div>
-                 </div>
-             {% endfor %}
-         </div>
-     </div>
- {% endfor %}
-
-    <!-- Paginación -->
-    <div class="pagination ">
-        <span class="step-links">
-            {% if page_obj.has_previous %}
-                <a href="?page=1">&laquo; Primera</a>
-                <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
-            {% endif %}
-
-            <span class="current">
-                Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
-            </span>
-
-            {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}">Siguiente</a>
-                <a href="?page={{ page_obj.paginator.num_pages }}">Última &raquo;</a>
-            {% endif %}
-        </span>
+    <!-- Grid de 3 columnas para los productos -->
+    <div class="row">
+      {% for articulo in tienda.list %}
+      <div class="col-md-4 mb-4">
+        <div>
+          <div class="card-body">
+            <h5 class="card-title">{{ articulo.titulo }}</h5>
+            <p class="card-text">
+              {{ articulo.descripcion|truncatechars:150 }}
+            </p>
+            <p class="card-text">${{ articulo.precio }}</p>
+            <img
+              src="{{ articulo.imagen.url }}"
+              alt="{{ articulo.titulo }}"
+              width="200"
+            />
+          </div>
+        </div>
+      </div>
+      {% endfor %}
     </div>
-{% else %}
-    <p>No hay productos disponibles.</p>
-{% endif %}
+  </div>
+  {% endfor %}
+
+  <!-- Paginación -->
+  <div class="pagination">
+    <span class="step-links">
+      {% if page_obj.has_previous %}
+      <a href="?page=1">&laquo; Primera</a>
+      <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+      {% endif %}
+
+      <span class="current">
+        Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+      </span>
+
+      {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}">Siguiente</a>
+      <a href="?page={{ page_obj.paginator.num_pages }}">Última &raquo;</a>
+      {% endif %}
+    </span>
+  </div>
+  {% else %}
+  <p>No hay productos disponibles.</p>
+  {% endif %}
 </div>
 {% endblock %}

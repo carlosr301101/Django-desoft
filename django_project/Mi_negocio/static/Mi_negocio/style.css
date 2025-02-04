@@ -58,50 +58,71 @@ body {
   /* Color al pasar el mouse */
   color: rgb(255, 255, 255);
 }
-/* Header fijo 
-.fixed-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: #333;
-    color: white;
-    padding: 10px 0;
-    z-index: 1000;
+
+.floating-cart {
+  position: fixed;
+  bottom: 500px;
+  right: 20px;
+  z-index: 100;
+}
+/* Carrito */
+.cart-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background-color: #a81b1b;
+  color: white;
+  border-radius: 50%;
+  text-decoration: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
 }
 
-.fixed-header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
+.cart-icon i {
+  font-size: 24px;
 }
 
-.fixed-header h1 {
-    margin: 0;
+#cartCount {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
 }
 
-.fixed-header nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
+#cleanButton {
+  margin-top: 10px;
+}
+#closeCart {
+  margin-top: 10px;
 }
 
-.fixed-header nav ul li {
-    margin-left: 20px;
+/* Estilo del modal del carrito */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 1001;
 }
 
-.fixed-header nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 100%;
 }
-
-.fixed-header nav ul li a:hover {
-    text-decoration: underline;
-}
-*/
 /* Espacio para el contenido debajo del header */
 .content {
   margin-top: 70px; /* Espacio para que no quede tapado por el header fijo */
