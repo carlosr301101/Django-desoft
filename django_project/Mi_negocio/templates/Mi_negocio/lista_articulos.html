@@ -12,19 +12,35 @@
   {% regroup page_obj by tienda as tiendas %} {% for tienda in tiendas %}
   <div class="mb-4">
     <!-- Nombre de la tienda -->
-    <button class="btn btn-outline-secondary me-2">
-      <h3>
-        <a
-          class="enlace-negro"
-          href="{% url 'ver_tienda' tienda_name=tienda.grouper.nombre %}"
-          >{{ tienda.grouper.nombre }}</a
-        >
-      </h3>
-    </button>
+    <a
+      class="enlace-negro"
+      href="{% url 'ver_tienda' tienda_name=tienda.grouper.nombre %}"
+    >
+      <button class="btn btn-outline-secondary me-2">
+        <h3>{{ tienda.grouper.nombre }}</h3>
+      </button>
+    </a>
+    <div class="row"><p></p></div>
     <!-- Grid de 3 columnas para los productos -->
-    <div class="row">
+    <div class="row row-cols-3 row-cols-md-3 g-4">
       {% for articulo in tienda.list %}
-      <div class="col-md-4 mb-4">
+      <div class="col">
+        <div class="card h-100">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">{{ articulo.titulo }}</h5>
+            <p class="card-text flex-grow-1">
+              {{ articulo.descripcion|truncatechars:150 }}
+            </p>
+            <p class="card-text">${{ articulo.precio }}</p>
+            <img
+              src="{{ articulo.imagen.url }}"
+              alt="{{ articulo.titulo }}"
+              class="img-fluid"
+            />
+          </div>
+        </div>
+      </div>
+      <!-- <div class="col-md-4 mb-4">
         <div>
           <div class="card-body">
             <h5 class="card-title">{{ articulo.titulo }}</h5>
@@ -39,7 +55,7 @@
             />
           </div>
         </div>
-      </div>
+      </div> -->
       {% endfor %}
     </div>
   </div>

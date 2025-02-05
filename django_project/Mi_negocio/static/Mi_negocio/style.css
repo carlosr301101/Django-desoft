@@ -1,3 +1,19 @@
+/* Asegúrate de que las tarjetas tengan un diseño consistente */
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Ajustar el tamaño máximo de las imágenes */
+.card img {
+  max-height: 300px;
+  object-fit: cover; /* Mantiene la proporción de la imagen */
+}
+
 h1 a {
   color: white;
   text-decoration: none;
