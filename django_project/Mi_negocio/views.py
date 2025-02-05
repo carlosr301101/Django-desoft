@@ -304,7 +304,7 @@ def generate_pdf(request,tienda_id):
             response = HttpResponse(content_type='application/pdf')
             response['Content-Disposition'] = f'attachment; filename="factura_{time_format}.pdf"'
             response.write(pdf)
-            print(response)
+            #print(response)
             return render(request,'Mi_negocio/generate_pdf.html',{'url_wsp':send_pdf_to_whatsapp(tienda,time_format),'tienda':tienda})
         else:
             return render(request,'Mi_negocio/ver_tienda.html',{'tienda':tienda})

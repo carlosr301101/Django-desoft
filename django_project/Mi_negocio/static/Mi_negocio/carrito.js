@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const cartCount = document.getElementById("cartCount");
   const cartItems = document.getElementById("cartItems");
   const cartTotal = document.getElementById("cartTotal");
-
+  updateCartUI();
   document
     .getElementById("checkoutForm")
     .addEventListener("submit", function (event) {
@@ -29,8 +29,11 @@ document.addEventListener("DOMContentLoaded", function () {
       const li = document.createElement("li");
       li.style.display = "flex";
       li.style.justifyContent = "space-between";
-      li.style.alignItems = "center";
+      li.style.alignItems = "right";
 
+      const ul = document.createElement("ul");
+      ul.style.display = "flex";
+      ul.className = "nav col-12 col-lg-auto   mb-md-0";
       // Detalles del artículo
       const details = document.createElement("span");
       details.textContent = `${item.titulo} - $${item.precio} x ${item.quantity}`;
@@ -39,14 +42,28 @@ document.addEventListener("DOMContentLoaded", function () {
       // Botón "X" para eliminar el artículo
       const removeButton = document.createElement("button");
       removeButton.textContent = "X";
-      removeButton.style.backgroundColor = "#dc3545"; // Rojo
+      removeButton.style.backgroundColor = "#dc3545";
       removeButton.style.color = "white";
       removeButton.style.border = "none";
       removeButton.style.borderRadius = "10px";
       removeButton.style.cursor = "pointer";
       removeButton.style.padding = "5px 10px";
 
-      // Evento para eliminar el artículo
+      const add_1Button = document.createElement("button");
+      add_1Button.textContent = "+";
+      add_1Button.style.backgroundColor = "blue";
+      add_1Button.style.color = "white";
+      add_1Button.style.border = "none";
+      add_1Button.style.borderRadius = "10px";
+      add_1Button.style.cursor = "pointer";
+      add_1Button.style.padding = "5px 10px";
+
+      add_1Button.addEventListener("click", function () {
+        cart[index]["quantity"] += 1; // Elimina el artículo del array
+        localStorage.setItem("cart", JSON.stringify(cart)); // Actualiza el localStorage
+        updateCartUI(); // Actualiza la interfaz del crrito
+      });
+
       removeButton.addEventListener("click", function () {
         if (
           confirm(
@@ -59,7 +76,10 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
 
-      li.appendChild(removeButton);
+      ul.appendChild(add_1Button);
+      ul.appendChild(removeButton);
+      li.appendChild(ul);
+
       cartItems.appendChild(li);
 
       // Calcular el total
@@ -115,7 +135,5 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("qrButton").addEventListener("click", function () {
     alert("Comparte este Código QR que contiene el link de tu tienda");
   });
-
-  // Inicializa la interfaz del carrito
   updateCartUI();
 });
