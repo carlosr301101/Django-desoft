@@ -18,4 +18,10 @@ class BusquedaForm(forms.Form):
         max_length=100,
         widget=forms.TextInput(attrs={'placeholder' : 'Ej:camisetas'})
         )
-    
+
+class CustomerForm(forms.Form):
+    cart_user= forms.CharField(
+        label='Su nombre',
+        max_length=50,
+        widget=forms.TextInput(attrs={'placeholder' : 'Manolo'}),
+        )

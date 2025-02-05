@@ -1,23 +1,21 @@
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, redirect , get_object_or_404
-from .forms import ArticuloForm, TiendaForm, BusquedaForm
+from .forms import ArticuloForm, TiendaForm, BusquedaForm, CustomerForm
 from .models import Articulo,Tienda
 from django.contrib.auth.decorators import \
 login_required
 from django.db.models import Q
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse
 from reportlab.pdfgen import canvas
 from io import BytesIO
 import json
 from django.conf import settings
 import os
-import requests
 from datetime import datetime
 from django.utils.text import slugify
 import qrcode
-import requests
-import json
-from PIL import Image
+
+
 
 # Create your views here.
 def index(request):
@@ -119,7 +117,7 @@ def agregar_articulo(request, tienda_name):
 
 def ver_tienda(request, tienda_name):
     tienda = Tienda.objects.get(nombre=tienda_name)
-
+    form=CustomerForm(request.GET or None)
     articulos=Articulo.objects.filter(tienda=tienda.id)
 
     paginator = Paginator(articulos, 6)
@@ -133,6 +131,7 @@ def ver_tienda(request, tienda_name):
         page_obj = paginator.get_page(paginator.num_pages)
 
     return render(request, 'Mi_negocio/ver_tienda.html', {
+        'form' : form,
         'tienda': tienda,
         'page_obj': page_obj,
     })
@@ -194,6 +193,7 @@ def send_pdf_to_whatsapp(tienda,time_format):
     return url
 
 def generate_qr(request,tienda_id):
+    
     # URL de tu tienda
     tienda = Tienda.objects.get(id=tienda_id)
     url_tienda = f"https://minegocio.pythonanywhere.com/Mi_negocio/ver_tienda/{tienda.nombre}"
@@ -226,78 +226,85 @@ def generate_qr(request,tienda_id):
 
 
 def generate_pdf(request,tienda_id):
-    
-    tienda = Tienda.objects.get(id=tienda_id)
-    nombre=slugify(tienda.nombre)
-    if request.method == 'POST':
-        # Obtener los datos del carrito del formulario
-        cart_data = request.POST.get('cart_data')
-        if not cart_data:
-            return HttpResponse("El carrito está vacío.")
+    form= CustomerForm(request.POST or None)
+    cart_user=request.POST['cart_user']
+    print(request.POST)
+    if form.is_valid():
+        tienda = Tienda.objects.get(id=tienda_id)
+        nombre=slugify(tienda.nombre)
+        if request.method == 'POST':
+            # Obtener los datos del carrito del formulario
+            cart_data = request.POST.get('cart_data')
+            if not cart_data:
+                return HttpResponse("El carrito está vacío.")
 
-        # Convertir los datos del carrito de JSON a Python
-        try:
-            cart = json.loads(cart_data)
-        except json.JSONDecodeError:
-            return HttpResponse("Error al procesar el carrito.")
+            # Convertir los datos del carrito de JSON a Python
+            try:
+                cart = json.loads(cart_data)
+            except json.JSONDecodeError:
+                return HttpResponse("Error al procesar el carrito.")
 
-        # Crear un archivo PDF en memoria
-        buffer = BytesIO()
-        p = canvas.Canvas(buffer)
+            # Crear un archivo PDF en memoria
+            buffer = BytesIO()
+            p = canvas.Canvas(buffer)
 
-        # Encabezado
-        p.drawString(100, 800, f"Factura de Compra de la tienda {tienda.nombre}")
-        p.drawString(100, 790, "-------------------------------------------------------------------------")
-        p.drawString(100, 770, f"Telefono del propietario de la tienda: {tienda.telefono}")
-        p.drawString(100, 750, f"Direccion: {tienda.direccion}")
-        p.drawString(100, 730, "-------------------------------------------------------------------------")
-        # Detalles del carrito
-        y = 700
-        total = 0
-        for item in cart:
-            titulo = item.get('titulo', 'Sin título')
-            precio = float(item.get('precio', 0))
-            quantity = int(item.get('quantity', 1))
+            # Encabezado
+            p.drawString(100, 800, f"Factura de Compra de la tienda {tienda.nombre}")
+            p.drawString(100, 790, "-------------------------------------------------------------------------")
+            p.drawString(100, 770, f"Telefono del propietario de la tienda: {tienda.telefono}")
+            p.drawString(100, 750, f"Direccion: {tienda.direccion}")
+            p.drawString(100, 730, "-------------------------------------------------------------------------")
+            p.drawString(100, 700,f"Nombre del beneficiario: {cart_user} ")
+            p.drawString(100, 680, "-------------------------------------------------------------------------")
+            # Detalles del carrito
+            y = 660
+            total = 0
+            for item in cart:
+                titulo = item.get('titulo', 'Sin título')
+                precio = float(item.get('precio', 0))
+                quantity = int(item.get('quantity', 1))
 
-            p.drawString(100, y, f"{titulo} - $ {precio} x {quantity}")
-            total += precio * quantity
-            y -= 20
+                p.drawString(100, y, f"{titulo} - $ {precio} x {quantity}")
+                total += precio * quantity
+                y -= 20
 
-        # Total
-        p.drawString(100, y - 20, f"Total: $ {total:.2f}")
-        # Finalizar el PDF
-        p.showPage()
-        p.save()
+            # Total
+            p.drawString(100, y - 20, f"Total: $ {total:.2f}")
+            # Finalizar el PDF
+            p.showPage()
+            p.save()
 
-         # Guardar el PDF en el servidor
-        time=datetime.now()
-        time_format=time.strftime("%d_%m_%Y_%H_%M_%S")
+            # Guardar el PDF en el servidor
+            time=datetime.now()
+            time_format=time.strftime("%d_%m_%Y_%H_%M_%S")
 
-        
-        path=os.path.join(settings.MEDIA_ROOT, 'facturas', nombre)
-
-
-
-        # Verificar si la carpeta existe
-        if not os.path.exists(path):
-            # Crear la carpeta si no existe
-            os.makedirs(path)
-                
-        
             
-        pdf_file_path = os.path.join(settings.MEDIA_ROOT, 'facturas',nombre, f'factura_{time_format}.pdf')
-        with open(pdf_file_path, 'wb') as f:
-            f.write(buffer.getvalue())
+            path=os.path.join(settings.MEDIA_ROOT, 'facturas', nombre)
 
-            # Enviar el PDF al WhatsApp del dueño de la tienda
-        
 
-            # Obtener el valor del buffer y devolverlo como respuesta
-        pdf = buffer.getvalue()
-        buffer.close()
 
-        response = HttpResponse(content_type='application/pdf')
-        response['Content-Disposition'] = f'attachment; filename="factura_{time_format}.pdf"'
-        response.write(pdf)
-        print(response)
-        return render(request,'Mi_negocio/generate_pdf.html',{'url_wsp':send_pdf_to_whatsapp(tienda,time_format),'tienda':tienda})
+            # Verificar si la carpeta existe
+            if not os.path.exists(path):
+                # Crear la carpeta si no existe
+                os.makedirs(path)
+                    
+            
+                
+            pdf_file_path = os.path.join(settings.MEDIA_ROOT, 'facturas',nombre, f'factura_{time_format}.pdf')
+            with open(pdf_file_path, 'wb') as f:
+                f.write(buffer.getvalue())
+
+                # Enviar el PDF al WhatsApp del dueño de la tienda
+            
+
+                # Obtener el valor del buffer y devolverlo como respuesta
+            pdf = buffer.getvalue()
+            buffer.close()
+
+            response = HttpResponse(content_type='application/pdf')
+            response['Content-Disposition'] = f'attachment; filename="factura_{time_format}.pdf"'
+            response.write(pdf)
+            print(response)
+            return render(request,'Mi_negocio/generate_pdf.html',{'url_wsp':send_pdf_to_whatsapp(tienda,time_format),'tienda':tienda})
+        else:
+            return render(request,'Mi_negocio/ver_tienda.html',{'tienda':tienda})

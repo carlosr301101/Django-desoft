@@ -17,18 +17,26 @@
         <!-- Aquí se mostrarán los artículos del carrito -->
       </ul>
       <p>Total: $<span id="cartTotal">0.00</span></p>
-
-      <form
-        id="checkoutForm"
-        method="post"
-        action="{% url 'generate_pdf' tienda_id=tienda.id%}"
-      >
-        {% csrf_token %}
-        <input type="hidden" id="cartData" name="cart_data" value="" />
-        <button id="buyCart" type="submit" class="btn btn-success">
-          Comprar
-        </button>
-      </form>
+      <div class="row">
+        <form
+          id="checkoutForm"
+          method="post"
+          action="{% url 'generate_pdf' tienda_id=tienda.id%}"
+        >
+          <input
+            type="text"
+            id="customerName"
+            name="cart_user"
+            placeholder="Ingrese su nombre"
+            required
+          />
+          {% csrf_token %}
+          <input type="hidden" id="cartData" name="cart_data" value="" />
+          <button id="buyCart" type="submit" class="btn btn-success">
+            Comprar
+          </button>
+        </form>
+      </div>
 
       <button id="cleanButton" class="btn btn-danger">Limpiar</button>
       <button id="closeCart" class="btn btn-secondary">Cerrar</button>
