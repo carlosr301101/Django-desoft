@@ -9,10 +9,8 @@
         {% for tienda in page_obj %}
             <li style="margin-top: 20px;">
                 
-                <a class="enlace-negro" href="{% url 'ver_tienda' tienda_id=tienda.id %}"><button class="btn btn-secondary "><div class="enlace-negro">{{ tienda.nombre }}</div></button></a>
-                <!-- Botón para acceder a los artículos de la tienda 
-                <a href="{% url 'ver_tienda' tienda_id=tienda.id %}">Ver artículos</a> 
-                -->
+                <a class="enlace-negro" href="{% url 'ver_tienda' tienda_name=tienda.nombre %}"><button class="btn btn-secondary "><div class="enlace-negro">{{ tienda.nombre }}</div></button></a>
+           
                 </button>
                 
             </li>

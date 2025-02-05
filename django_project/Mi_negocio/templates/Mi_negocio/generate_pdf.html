@@ -1,10 +1,28 @@
 {% extends 'Mi_negocio/layout.html' %} {% block body %}
-
-<h2 class="blanco">Envie su factura</h2>
-<a class="enlace-negro" href="{{url_wsp}}"
-  ><button class="btn btn-primary">
-    <div class="enlace-negro">Enviar</div>
-  </button></a
->
-
+<h1 style="margin-left: 25px" class="blanco">Muchas gracias por su compra</h1>
+<div class="content justify-content-center">
+  <h2 class="blanco" style="margin-left: 25px">Envie su factura</h2>
+  <div class="row">
+    <ul
+      class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-left mb-md-0"
+    >
+      <li style="margin-left: 25px">
+        <a class="enlace-negro" href="{{url_wsp}}"
+          ><button class="btn btn-primary">
+            <div class="enlace-negro">Enviar</div>
+          </button></a
+        >
+      </li>
+      <li style="margin-left: 25px">
+        <a
+          class="enlace-negro"
+          href="{% url 'ver_tienda' tienda_name=tienda.nombre %}"
+          ><button class="btn btn-secondary">
+            <div class="enlace-negro">Tienda</div>
+          </button></a
+        >
+      </li>
+    </ul>
+  </div>
+</div>
 {%endblock%}

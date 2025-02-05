@@ -20,7 +20,7 @@
       <h4>
         <a
           class="enlace-negro"
-          href="{% url 'ver_tienda' tienda_id=tienda.id %}"
+          href="{% url 'ver_tienda' tienda_name=tienda.nombre %}"
           >{{ tienda.nombre }}</a
         >
       </h4>
@@ -28,7 +28,7 @@
     <ul>
       {% for producto in productos %}
       <li>
-        {{ producto.titulo }} - {{ producto.descripcion|truncatechars:50 }} -
+        {{ producto.titulo }} - {{ producto.descripcion|truncatechars:150 }} -
         ${{ producto.precio }}
       </li>
       {% endfor %}

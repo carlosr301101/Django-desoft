@@ -17,6 +17,8 @@ from django.utils.text import slugify
 import qrcode
 import requests
 import json
+from PIL import Image
+
 # Create your views here.
 def index(request):
     return render(request,"Mi_negocio/index.html")
@@ -81,7 +83,7 @@ def eliminar_articulo(request, articulo_id):
         
         articulo.delete()
     
-    return redirect('ver_tienda', tienda_id=articulo.tienda.id)
+    return redirect('ver_tienda', tienda_name=articulo.tienda.nombre)
 
 @login_required
 def crear_tienda(request):
@@ -92,14 +94,14 @@ def crear_tienda(request):
             tienda.propietario = request.user
             tienda.save()
             
-            return redirect('ver_tienda', tienda_id=tienda.id)
+            return redirect('ver_tienda', tienda_name=tienda.nombre)
     else:
         tienda_form = TiendaForm()
     return render(request, 'Mi_negocio/crear_tienda.html', {'tienda_form': tienda_form})
 
 @login_required
-def agregar_articulo(request, tienda_id):
-    tienda = Tienda.objects.get(id=tienda_id)
+def agregar_articulo(request, tienda_name):
+    tienda = Tienda.objects.get(nombre=tienda_name)
     if tienda.propietario != request.user:
         return redirect('index')
 
@@ -109,16 +111,16 @@ def agregar_articulo(request, tienda_id):
             articulo = form.save(commit=False)
             articulo.tienda = tienda
             articulo.save()
-            return redirect('ver_tienda', tienda_id=tienda.id)
+            return redirect('ver_tienda', tienda_name=tienda.nombre)
     else:
         form = ArticuloForm()
 
     return render(request, 'Mi_negocio/agregar_articulo.html', {'form': form, 'tienda': tienda})
 
-def ver_tienda(request, tienda_id):
-    tienda = Tienda.objects.get(id=tienda_id)
+def ver_tienda(request, tienda_name):
+    tienda = Tienda.objects.get(nombre=tienda_name)
 
-    articulos=Articulo.objects.filter(tienda=tienda_id)
+    articulos=Articulo.objects.filter(tienda=tienda.id)
 
     paginator = Paginator(articulos, 6)
     page_number = request.GET.get('page')  
@@ -194,7 +196,7 @@ def send_pdf_to_whatsapp(tienda,time_format):
 def generate_qr(request,tienda_id):
     # URL de tu tienda
     tienda = Tienda.objects.get(id=tienda_id)
-    url_tienda = f"https://minegocio.pythonanywhere.com/Mi_negocio/ver_tienda/{tienda_id}"
+    url_tienda = f"https://minegocio.pythonanywhere.com/Mi_negocio/ver_tienda/{tienda.nombre}"
    # print (request)
   
     qr = qrcode.QRCode(
@@ -206,9 +208,9 @@ def generate_qr(request,tienda_id):
     qr.add_data(url_tienda)
     qr.make(fit=True)
 
-    # Crear una imagen del código QR
     img = qr.make_image(fill_color="black", back_color="white")
-    
+   # path=os.path.join('Mi_negocio',settings.STATIC_URL, 'Mi_negocio' )
+ 
 
     # Guardar la imagen en un buffer
     buffer = BytesIO()
@@ -297,4 +299,5 @@ def generate_pdf(request,tienda_id):
         response = HttpResponse(content_type='application/pdf')
         response['Content-Disposition'] = f'attachment; filename="factura_{time_format}.pdf"'
         response.write(pdf)
-        return render(request,'Mi_negocio/generate_pdf.html',{'url_wsp':send_pdf_to_whatsapp(tienda,time_format)})
+        print(response)
+        return render(request,'Mi_negocio/generate_pdf.html',{'url_wsp':send_pdf_to_whatsapp(tienda,time_format),'tienda':tienda})
