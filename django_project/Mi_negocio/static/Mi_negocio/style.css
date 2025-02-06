@@ -45,7 +45,7 @@ h1.link_tienda a {
   scale: 1.1;
 }
 body {
-  padding-top: 80px;
+  padding-top: 100px;
   background-color: #f0f0f0;
   background-image: url("../../static/Mi_negocio/background.png");
   background-repeat: no-repeat;
