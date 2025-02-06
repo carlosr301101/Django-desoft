@@ -3,6 +3,24 @@ document.addEventListener("DOMContentLoaded", function () {
   const cartCount = document.getElementById("cartCount");
   const cartItems = document.getElementById("cartItems");
   const cartTotal = document.getElementById("cartTotal");
+  //1
+  let isReloading = false;
+
+  // Detectar si la página se está recargando
+  window.addEventListener("load", function () {
+    isReloading =
+      performance.navigation.type === performance.navigation.TYPE_RELOAD;
+  });
+
+  // Limpiar el carrito solo cuando el usuario abandona la página
+  window.addEventListener("beforeunload", function () {
+    if (!isReloading) {
+      // Limpiar el carrito en sessionStorage
+      sessionStorage.removeItem("cart");
+      console.log("Carrito limpiado al salir de la página.");
+    }
+  });
+  //1
   updateCartUI();
   document
     .getElementById("checkoutForm")
@@ -105,6 +123,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       sessionStorage.setItem("cart", JSON.stringify(cart));
+
       updateCartUI();
     });
   });
@@ -122,7 +141,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("cleanButton").addEventListener("click", function () {
     if (confirm("¿Estás seguro de que deseas limpiar el carrito?")) {
       // Vaciar el carrito en localStorage
-      localStorage.removeItem("cart");
+      sessionStorage.removeItem("cart");
 
       // Restablecer el carrito en memoria
       cart.length = 0;

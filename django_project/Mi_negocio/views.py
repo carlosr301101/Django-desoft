@@ -19,6 +19,7 @@ import qrcode
 
 # Create your views here.
 def index(request):
+    request.session['cart']='cart'
     return render(request,"Mi_negocio/index.html")
 
 def listar_tiendas(request):
@@ -122,6 +123,8 @@ def ver_tienda(request, tienda_name):
 
     paginator = Paginator(articulos, 9)
     page_number = request.GET.get('page')  
+   # 
+    print(request.body)
 
     try:
         page_obj = paginator.get_page(page_number)
