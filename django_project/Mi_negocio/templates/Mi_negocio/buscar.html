@@ -69,7 +69,7 @@
       >
       {% endif %}
 
-      <span class="current mx-2 text-secondary">
+      <span class="current mx-2 text-black">
         Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
       </span>
 
@@ -89,7 +89,7 @@
   </div>
 
   {% else %}
-  <p class="text-center blanco">No se encontraron resultados.</p>
+  <p class="text-center">No se encontraron resultados.</p>
   {% endif %}
 </div>
 {% endblock %}

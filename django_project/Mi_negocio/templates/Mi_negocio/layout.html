@@ -33,7 +33,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
   </head>
   <body>
-    <header class="p-3 fixed-top">
+    <header class="p-2 fixed-top">
       <div class="row g-4">
           <nav class="navbar navbar-dark">
             <div
@@ -59,15 +59,15 @@
                 <!-- Logo + Título -->
                 <a
                   href="/"
-                  class="navbar-brand d-flex align-items-center text-white text-decoration-none"
+                  class="navbar-brand d-flex align-items-center text-white text-decoration-none sm-2"
                 >
                   <img
+                 
                     src="{% static 'Mi_negocio/logo.png' %}"
                     alt="Logo de la empresa"
                     class="logo me-2"
                     style="width: 40px; height: 40px"
                   />
-                  Mi_negocio
                 </a>
               </div>
               
@@ -75,19 +75,19 @@
            
         
               <!-- Columna 2: Botones de Acción -->
-              <div class="d-flex align-items-center fixed-end">
+              <div class="d-flex align-items-center fixed-end ">
                 <!-- Usuario Autenticado -->
-                {% if user.is_authenticated %}
+               <!--  {% if user.is_authenticated %}
                 <span class="text-white me-2">{{ user.username }}</span>
-                {% endif %}
+                {% endif %} -->
 
                 <!-- Botones -->
                 <a
                   href="{% url 'buscar_articulo' %}"
-                  class="btn btn-outline-secondary me-2"
+                  class="btn btn-outline-light  me-2"
                   >Buscar artículo</a
                 >
-                <a href="{% url 'login' %}" class="btn btn-outline-light me-2"
+                <a href="{% url 'login' %}" class="btn btn-primary btn-outline-light me-2"
                   >Login</a
                 >
                 <form
