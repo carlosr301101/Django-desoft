@@ -6,7 +6,7 @@
   }
 </style>
 <script src="{% static 'Mi_negocio/carrito.js' %}"></script>
-<div class="no-bg content">
+<div class="no-bg">
   <!-- Carrito -->
 
   <!-- Modal o Panel Lateral para Mostrar el Carrito -->
@@ -43,7 +43,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="content">
+    <div class="card">
       <h2>{{ tienda.nombre }}</h2>
       <p>Dirección: {{ tienda.direccion }}</p>
       <p>
@@ -62,7 +62,6 @@
       <span id="cartCount">0</span>
     </a>
   </div>
-
   {% if page_obj %}
 
   <h3>Artículos</h3>

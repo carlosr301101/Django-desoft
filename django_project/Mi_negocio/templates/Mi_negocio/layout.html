@@ -33,18 +33,18 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
   </head>
   <body>
-    <header class="p-2 fixed-top">
+    <header class="p-2 fixed-top sm-auto">
       <div class="row g-4">
           <nav class="navbar navbar-dark">
             <div
               class="container-fluid d-flex align-items-center justify-content-between"
             >
               <!-- Columna 1: Menú Hamburguesa + Logo + Título -->
-              <div class="d-flex align-items-center">
+              <div class="d-flex align-items-center ">
                 <!-- Botón de Hamburguesa -->
                 <button
                   id="button-toggler"
-                  class="navbar-toggler"
+                  class="navbar-toggler btn-sm me-2 d-block d-md-inline"
                   type="button"
                   data-bs-toggle="collapse"
                   data-bs-target="#navbarNav"
@@ -68,6 +68,7 @@
                     class="logo me-2"
                     style="width: 40px; height: 40px"
                   />
+                  <span class="d-none d-md-inline">Mi_negocio</span>
                 </a>
               </div>
               
@@ -84,20 +85,24 @@
                 <!-- Botones -->
                 <a
                   href="{% url 'buscar_articulo' %}"
-                  class="btn btn-outline-light  me-2"
+                  class="btn btn-outline-light btn-sm me-2 d-block d-md-inline"
                   >Buscar artículo</a
                 >
-                <a href="{% url 'login' %}" class="btn btn-primary btn-outline-light me-2"
-                  >Login</a
-                >
+                {% if user.is_authenticated %}
                 <form
                   action="{% url 'logout' %}"
                   method="post"
                   class="d-inline"
                 >
                   {% csrf_token %}
-                  <button type="submit" class="btn btn-warning">Logout</button>
+                  <button type="submit" class="btn btn-warning btn-sm me-2 d-block d-md-inline">Logout</button>
                 </form>
+                {%else%}
+                   
+                <a href="{% url 'login' %}" class="btn btn-primary btn-outline-light btn-sm me-2 d-block d-md-inline"
+                  >Login</a
+                >
+                {%endif%}
               </div>
             </div>
             <div class="collapse navbar-collapse" id="navbarNav">

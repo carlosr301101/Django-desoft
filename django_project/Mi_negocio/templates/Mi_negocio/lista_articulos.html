@@ -5,15 +5,16 @@
     background: linear-gradient(190deg, #cedcf7, #e3edf7);
   }
 </style>
-<div class="content no-bg container-flex">
-  <h2>Listado de Productos</h2>
+<div class="no-bg container-flex">
+  <div class="card mb-2">
+    <h2>Listado de Productos</h2>
 
-  {% if page_obj %}
-  <p>
-    Mostrando {{ page_obj.start_index }} - {{ page_obj.end_index }} de
-    {{page_obj.paginator.count }} productos.
-  </p>
-
+    {% if page_obj %}
+    <p>
+      Mostrando {{ page_obj.start_index }} - {{ page_obj.end_index }} de
+      {{page_obj.paginator.count }} productos.
+    </p>
+  </div>
   <!-- Agrupar productos por tienda -->
   {% regroup page_obj by tienda as tiendas %} {% for tienda in tiendas %}
   <div class="mb-4">
