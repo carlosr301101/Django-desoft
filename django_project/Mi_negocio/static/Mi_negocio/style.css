@@ -1,6 +1,25 @@
 /* Asegúrate de que las tarjetas tengan un diseño consistente */
+/* Ajustar el tamaño del logo */
+.navbar-brand img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+}
+
+/* Mejorar el espaciado entre elementos */
+.navbar-nav .nav-link,
+.navbar-nav .btn {
+  margin-right: 10px;
+}
+
+/* Estilo del botón de hamburguesa */
+.navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
 .card {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .card:hover {
@@ -43,6 +62,7 @@ h1.link_tienda a {
   scale: 1.1;
 }
 body {
+  padding-top: 70px;
   background-color: #f0f0f0;
   background-image: url("../../static/Mi_negocio/background.png");
   background-repeat: no-repeat;

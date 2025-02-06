@@ -2,20 +2,129 @@
 
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mi_negocio</title>
-    <link rel="stylesheet" href="{% static 'Mi_negocio/style.css' %}">
-    {#  Bootstrap  #}
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous"> 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/v5-font-face.min.css" integrity="sha512-dC4AauJwDHOpEpJi2/BsDf/b9vyLVt79nmO0x5gQWbRm62Q/xFS9iZpzCOFNLjTQsAD4mp9jJel6nPAjnBN2Ag==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/js/all.min.js" integrity="sha512-b+nQTCdtTBIRIbraqNEwsjB6UvL3UEMkXnhzd8awtCYh0Kcsjl9uEgwVFVbhoj3uu1DO1ZMacNvLoyJJiNfcvg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
-    
-</head>
-<body >
+    <link rel="stylesheet" href="{% static 'Mi_negocio/style.css' %}" />
+    {# Bootstrap #}
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/v5-font-face.min.css"
+      integrity="sha512-dC4AauJwDHOpEpJi2/BsDf/b9vyLVt79nmO0x5gQWbRm62Q/xFS9iZpzCOFNLjTQsAD4mp9jJel6nPAjnBN2Ag=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/js/all.min.js"
+      integrity="sha512-b+nQTCdtTBIRIbraqNEwsjB6UvL3UEMkXnhzd8awtCYh0Kcsjl9uEgwVFVbhoj3uu1DO1ZMacNvLoyJJiNfcvg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <header class="p-3 fixed-top">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+          <!-- Logo -->
+          <a
+            href="/"
+            class="navbar-brand d-flex align-items-center text-white text-decoration-none"
+          >
+            <img
+              src="{% static 'Mi_negocio/logo.png' %}"
+              alt="Logo de la empresa"
+              class="logo me-2"
+              style="width: 40px; height: 40px"
+            />
+            Mi_negocio
+          </a>
 
+          <!-- Botón de Hamburguesa -->
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <!-- Contenido del Menú -->
+          <div
+            class="collapse navbar-collapse justify-content-between"
+            id="navbarNav"
+          >
+            <!-- Enlaces de Navegación -->
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a href="#" class="nav-link px-2 text-white">Acerca de</a>
+              </li>
+              <li class="nav-item">
+                <a
+                  href="{% url 'lista_articulos' %}"
+                  class="nav-link px-2 text-white"
+                  >Lista de artículos</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  href="https://github.com/carlosr301101"
+                  class="nav-link px-2 text-white"
+                  >Contacto</a
+                >
+              </li>
+            </ul>
+
+            <!-- Usuario Autenticado -->
+            {% if user.is_authenticated %}
+            <span class="text-white me-3">{{ user.username }}</span>
+            {% endif %}
+
+            <!-- Botones de Acción -->
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a
+                  href="{% url 'buscar_articulo' %}"
+                  class="btn btn-outline-secondary me-2"
+                  >Buscar artículo</a
+                >
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'login' %}" class="btn btn-outline-light me-2"
+                  >Login</a
+                >
+              </li>
+              <li class="nav-item">
+                <form
+                  action="{% url 'logout' %}"
+                  method="post"
+                  class="d-inline"
+                >
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-warning">Logout</button>
+                </form>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <!-- 
 <header class="p-3 text-bg-dark">
     <div class="container-fluid flex-wrap">
     <div class="row align-items-center">
@@ -46,16 +155,16 @@
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
            
                 <a class="enlace-negro" href="{%url 'buscar_articulo' %}">
-                <!-- <form action="{% url 'buscar_articulo' %} "   role="search" method="get"> -->
+            
                     <button type="submit"  class="btn btn-outline-secondary me-2" >Buscar_articulo</button>
-               <!--  </form> -->
+         
                 </a>
 
                 <a class="enlace-negro" href="{%url 'login' %}">
-                <!-- <form action="{% url 'login' %}" method="post"> -->
+                
                     {% csrf_token %}
                 <button type="submit"  class="btn btn-outline-light me-2" >Login</button>
-               <!--  </form> -->
+              
              </a>
           
             
@@ -73,21 +182,18 @@
     </div>
   </header>
 
-
+ -->
     <!-- Contenido principal -->
-    <div class="container-flex ">
-      <div>
-        {% block body %}
-        {% endblock body %}
-      </div>
-      </div>
+    <div class="container-flex">
+      <div>{% block body %} {% endblock body %}</div>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <footer >
-        <p>&copy; 2025 @int_64</p>
+    <footer>
+      <p>&copy; 2025 @int_64</p>
     </footer>
-</body>
+  </body>
 </html>
