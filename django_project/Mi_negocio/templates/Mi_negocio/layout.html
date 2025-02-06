@@ -34,11 +34,26 @@
     ></script>
   </head>
   <body>
-    <header class="p-3 fixed-top">
-      <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg navbar-dark">
-          <!-- Logo -->
-          <!--  -->
+    <header class="p-3 text-bg-dark fixed-top">
+      <div
+        class="container-fluid d-flex align-items-center justify-content-between"
+      >
+        <!-- Columna 1: Menú Hamburguesa + Logo + Título -->
+        <div class="d-flex align-items-center">
+          <!-- Botón de Hamburguesa -->
+          <button
+            class="navbar-toggler me-2"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <!-- Logo + Título -->
           <a
             href="/"
             class="navbar-brand d-flex align-items-center text-white text-decoration-none"
@@ -51,79 +66,52 @@
             />
             Mi_negocio
           </a>
+        </div>
 
-          <!-- Botón de Hamburguesa -->
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
+        <!-- Columna 2: Botones de Acción -->
+        <div class="d-flex align-items-center">
+          <!-- Usuario Autenticado -->
+          {% if user.is_authenticated %}
+          <span class="text-white me-2">{{ user.username }}</span>
+          {% endif %}
+
+          <!-- Botones -->
+          <a
+            href="{% url 'buscar_articulo' %}"
+            class="btn btn-outline-secondary me-2"
+            >Buscar artículo</a
           >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-
-          <!-- Contenido del Menú -->
-          <div
-            class="collapse navbar-collapse justify-content-between"
-            id="navbarNav"
+          <a href="{% url 'login' %}" class="btn btn-outline-light me-2"
+            >Login</a
           >
-            <!-- Enlaces de Navegación -->
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a href="#" class="nav-link px-2 text-white">Acerca de</a>
-              </li>
-              <li class="nav-item">
-                <a
-                  href="{% url 'lista_articulos' %}"
-                  class="nav-link px-2 text-white"
-                  >Lista de artículos</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  href="https://github.com/carlosr301101"
-                  class="nav-link px-2 text-white"
-                  >Contacto</a
-                >
-              </li>
-            </ul>
+          <form action="{% url 'logout' %}" method="post" class="d-inline">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-warning">Logout</button>
+          </form>
+        </div>
+      </div>
 
-            <!-- Botones de Acción -->
-            <ul class="navbar-nav mb-2 mb-lg-0">
-              <li class="nav-item">
-                <!-- Usuario Autenticado -->
-                {% if user.is_authenticated %}
-                <span class="text-white me-3">{{ user.username }}</span>
-                {% endif %}
-              </li>
-              <li class="nav-item">
-                <a
-                  href="{% url 'buscar_articulo' %}"
-                  class="btn btn-outline-secondary me-2"
-                  >Buscar artículo</a
-                >
-              </li>
-              <li class="nav-item">
-                <a href="{% url 'login' %}" class="btn btn-outline-light me-2"
-                  >Login</a
-                >
-              </li>
-              <li class="nav-item">
-                <form
-                  action="{% url 'logout' %}"
-                  method="post"
-                  class="d-inline"
-                >
-                  {% csrf_token %}
-                  <button type="submit" class="btn btn-warning">Logout</button>
-                </form>
-              </li>
-            </ul>
-          </div>
-        </nav>
+      <!-- Menú Desplegable (Oculto en Dispositivos Grandes) -->
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav flex-column w-100">
+          <li class="nav-item border-bottom py-2">
+            <a href="#" class="nav-link px-2 text-white">Acerca de</a>
+          </li>
+          <li class="nav-item border-bottom py-2">
+            <a
+              href="{% url 'lista_articulos' %}"
+              class="nav-link px-2 text-white"
+              >Lista de artículos</a
+            >
+          </li>
+          <li class="nav-item border-bottom py-2">
+            <a
+              href="https://github.com/carlosr301101"
+              class="nav-link px-2 text-white"
+              >Contacto</a
+            >
+          </li>
+        </ul>
       </div>
     </header>
     <!-- 
