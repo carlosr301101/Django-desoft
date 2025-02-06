@@ -24,7 +24,6 @@ h1 a {
 .logo {
   height: 50px; /* Ajusta la altura del logo */
   margin-right: 20px; /* Espacio entre el logo y el título */
-  background-color: aliceblue;
 }
 header {
   /*position: fixed; /* Fija el header en la parte superior */

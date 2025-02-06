@@ -5,8 +5,8 @@
     background: linear-gradient(190deg, #cedcf7, #e3edf7);
   }
 </style>
-<div class="no-bg container-flex">
-  <div class="card ml-3 text-center">
+<div class="no-bg">
+  <div class="card text-center">
     <h2>Listado de Productos</h2>
 
     {% if page_obj %}
@@ -31,17 +31,39 @@
     </div>
 
     <div class="row d-flex"><p></p></div>
-    <!-- Grid de 3 columnas para los productos -->
-    <ul class="d-flex justify-content-around">
-      <div class="row row-cols-2 row-cols-md-3 g-4">
+    <ul class="d-flex justify-content-around px-2">
+      <div class="row row-cols-2 row-cols-md-3 row-cols-sm-2 g-4">
         {% for articulo in tienda.list %}
         <div class="col">
           <div class="card h-100">
             <div class="card-body d-flex flex-column">
               <h5 class="card-title">{{ articulo.titulo }}</h5>
               <!--  <p class="card-text flex-grow-1">
+                {{ articulo.descripcion|truncatechars:25 }}
+              </p> -->
+              <p class="card-text">${{ articulo.precio }}</p>
+              <img
+                src="{{ articulo.imagen.url }}"
+                alt="{{ articulo.titulo }}"
+                class="img-fluid"
+              />
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </ul>
+    <!-- Grid de 3 columnas para los productos -->
+    <!--    <ul class="d-flex justify-content-around">
+      <div class="row row-cols-2 row-cols-md-3 g-4">
+        {% for articulo in tienda.list %}
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">{{ articulo.titulo }}</h5>
+                <p class="card-text flex-grow-1">
                {{ articulo.descripcion|truncatechars:2 }}
-            </p> -->
+            </p> 
               <p class="card-text">${{ articulo.precio }}</p>
               <img
                 src="{{ articulo.imagen.url }}"
@@ -54,7 +76,7 @@
 
         {% endfor %}
       </div>
-    </ul>
+    </ul> -->
   </div>
   {% endfor %}
 
