@@ -97,7 +97,7 @@ body {
   text-decoration: none;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   position: sticky;
-  top: 50%;
+  top: 150%;
 }
 
 .cart-icon i {
