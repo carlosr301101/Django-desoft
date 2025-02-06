@@ -82,7 +82,7 @@
             <div class="card-body d-flex flex-column">
               <h5 class="card-title">{{ articulo.titulo }}</h5>
               <p class="card-text flex-grow-1">
-                {{ articulo.descripcion|truncatechars:150 }}
+                {{ articulo.descripcion|truncatechars:25 }}
               </p>
               <p class="card-text">${{ articulo.precio }}</p>
               <img
