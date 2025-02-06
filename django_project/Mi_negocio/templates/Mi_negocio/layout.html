@@ -8,12 +8,14 @@
     <title>Mi_negocio</title>
     <link rel="stylesheet" href="{% static 'Mi_negocio/style.css' %}" />
     {# Bootstrap #}
+    <!-- Bootstrap CSS -->
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
-      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
-      crossorigin="anonymous"
     />
+
+    <!-- Bootstrap JS (con Popper.js) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/v5-font-face.min.css"
@@ -32,24 +34,18 @@
       integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
       crossorigin="anonymous"
     ></script>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   </head>
   <body>
     <header class="p-3 fixed-top">
-      <div
-        class="container-fluid d-flex align-items-center justify-content-between"
-      >
-        <!-- Columna 1: Menú Hamburguesa + Logo + Título -->
-        <div class="d-flex align-items-center">
-          <!-- Botón de Hamburguesa -->
-          <nav class="navbar navbar-expand-lg navbar-dark">
+      <nav class="navbar navbar-expand-lg navbar-dark">
+        <div
+          class="container-fluid d-flex align-items-center justify-content-between"
+        >
+          <!-- Columna 1: Menú Hamburguesa + Logo + Título -->
+          <div class="d-flex align-items-center">
+            <!-- Botón de Hamburguesa -->
             <button
-              class="navbar-toggler collapsed"
+              class="navbar-toggler"
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#navbarNav"
@@ -59,69 +55,68 @@
             >
               <span class="navbar-toggler-icon"></span>
             </button>
-          <!-- </nav> -->
-          <!-- Logo + Título -->
-          <a
-            href="/"
-            class="navbar-brand d-flex align-items-center text-white text-decoration-none"
-          >
-            <img
-              src="{% static 'Mi_negocio/logo.png' %}"
-              alt="Logo de la empresa"
-              class="logo me-2"
-              style="width: 40px; height: 40px"
-            />
-            Mi_negocio
-          </a>
-        </div>
+          </div>
+          <div class="d-flex align-items-center">
+            <!-- Logo + Título -->
+            <a
+              href="/"
+              class="navbar-brand d-flex align-items-center text-white text-decoration-none"
+            >
+              <img
+                src="{% static 'Mi_negocio/logo.png' %}"
+                alt="Logo de la empresa"
+                class="logo me-2"
+                style="width: 40px; height: 40px"
+              />
+              Mi_negocio
+            </a>
+          </div>
 
-        <!-- Columna 2: Botones de Acción -->
-        <div class="d-flex align-items-center">
-          <!-- Usuario Autenticado -->
-          {% if user.is_authenticated %}
-          <span class="text-white me-2">{{ user.username }}</span>
-          {% endif %}
+          <!-- Columna 2: Botones de Acción -->
+          <div class="d-flex align-items-center">
+            <!-- Usuario Autenticado -->
+            {% if user.is_authenticated %}
+            <span class="text-white me-2">{{ user.username }}</span>
+            {% endif %}
 
-          <!-- Botones -->
-          <a
-            href="{% url 'buscar_articulo' %}"
-            class="btn btn-outline-secondary me-2"
-            >Buscar artículo</a
-          >
-          <a href="{% url 'login' %}" class="btn btn-outline-light me-2"
-            >Login</a
-          >
-          <form action="{% url 'logout' %}" method="post" class="d-inline">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-warning">Logout</button>
-          </form>
-        </div>
-      </div>
-
-      <!-- Menú Desplegable (Oculto en Dispositivos Grandes) -->
-      <!-- <nav class="navbar navbar-expand-lg navbar-dark"> -->
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav flex-column w-100">
-            <li class="nav-item border-bottom py-2">
-              <a href="#" class="nav-link px-2 text-white">Acerca de</a>
-            </li>
-            <li class="nav-item border-bottom py-2">
-              <a
-                href="{% url 'lista_articulos' %}"
-                class="nav-link px-2 text-white"
-                >Lista de artículos</a
-              >
-            </li>
-            <li class="nav-item border-bottom py-2">
-              <a
-                href="https://github.com/carlosr301101"
-                class="nav-link px-2 text-white"
-                >Contacto</a
-              >
-            </li>
-          </ul>
+            <!-- Botones -->
+            <a
+              href="{% url 'buscar_articulo' %}"
+              class="btn btn-outline-secondary me-2"
+              >Buscar artículo</a
+            >
+            <a href="{% url 'login' %}" class="btn btn-outline-light me-2"
+              >Login</a
+            >
+            <form action="{% url 'logout' %}" method="post" class="d-inline">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-warning">Logout</button>
+            </form>
+          </div>
         </div>
       </nav>
+      <!-- Menú Desplegable (Oculto en Dispositivos Grandes) -->
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav flex-column w-100">
+          <li class="nav-item border-bottom py-2">
+            <a href="#" class="nav-link px-2 text-white">Acerca de</a>
+          </li>
+          <li class="nav-item border-bottom py-2">
+            <a
+              href="{% url 'lista_articulos' %}"
+              class="nav-link px-2 text-white"
+              >Lista de artículos</a
+            >
+          </li>
+          <li class="nav-item border-bottom py-2">
+            <a
+              href="https://github.com/carlosr301101"
+              class="nav-link px-2 text-white"
+              >Contacto</a
+            >
+          </li>
+        </ul>
+      </div>
     </header>
     <!-- 
 <header class="p-3 text-bg-dark">
