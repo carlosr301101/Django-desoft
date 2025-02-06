@@ -8,6 +8,12 @@
 <script src="{% static 'Mi_negocio/carrito.js' %}"></script>
 <div class="no-bg content">
   <!-- Carrito -->
+  <div class="floating-cart">
+    <a href="#" id="openCart" class="cart-icon">
+      <i class="fas fa-shopping-cart"></i>
+      <span id="cartCount">0</span>
+    </a>
+  </div>
 
   <!-- Modal o Panel Lateral para Mostrar el Carrito -->
   <div id="cartModal" class="modal">
@@ -69,10 +75,10 @@
   <h3>Artículos</h3>
   <div>
     <ul>
-      <div class="row row-cols-2 row-cols-md-3 row-cols-sm-2 g-2">
+      <div class="row row-cols-2 row-cols-md-3 row-cols-sm-2 g-4">
         {% for articulo in page_obj %}
         <div class="col">
-          <div class="card h-50">
+          <div class="card h-100">
             <div class="card-body d-flex flex-column">
               <h5 class="card-title">{{ articulo.titulo }}</h5>
               <!--  <p class="card-text flex-grow-1">
@@ -163,12 +169,6 @@
           Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
         </span>
       </li>
-      <div class="floating-cart">
-        <a href="#" id="openCart" class="cart-icon">
-          <i class="fas fa-shopping-cart"></i>
-          <span id="cartCount">0</span>
-        </a>
-      </div>
 
       {% if page_obj.has_next %}
       <li class="page-item">
