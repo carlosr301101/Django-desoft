@@ -58,7 +58,7 @@ def lista_articulos(request):
     productos = Articulo.objects.select_related('tienda').all().order_by('tienda')
 
     
-    paginator = Paginator(productos, 9)
+    paginator = Paginator(productos, 10)
     page_number = request.GET.get('page')  
 
     try:
@@ -121,7 +121,7 @@ def ver_tienda(request, tienda_name):
     form=CustomerForm(request.GET or None)
     articulos=Articulo.objects.filter(tienda=tienda.id)
 
-    paginator = Paginator(articulos, 9)
+    paginator = Paginator(articulos, 10)
     page_number = request.GET.get('page')  
    # 
     print(request.body)

@@ -5,11 +5,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const cartTotal = document.getElementById("cartTotal");
   //1
   let isReloading = false;
-
+  updateCartUI();
   // Detectar si la página se está recargando
-  window.addEventListener("load", function () {
-    isReloading =
-      performance.navigation.type === performance.navigation.TYPE_RELOAD;
+  window.addEventListener("unload", function () {
+    isReloading = false;
   });
 
   // Limpiar el carrito solo cuando el usuario abandona la página
@@ -21,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
   //1
-  updateCartUI();
+
   document
     .getElementById("checkoutForm")
     .addEventListener("submit", function (event) {

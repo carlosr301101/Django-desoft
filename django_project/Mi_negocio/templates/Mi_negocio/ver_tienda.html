@@ -42,7 +42,7 @@
       <button id="closeCart" class="btn btn-secondary">Cerrar</button>
     </div>
   </div>
-  <div class="row">
+  <div class="d-flex row p-2">
     <div class="card">
       <h2 class="text-center">{{ tienda.nombre }}</h2>
       <p>Dirección: {{ tienda.direccion }}</p>
@@ -63,10 +63,8 @@
     </a>
   </div>
   {% if page_obj %}
-
-  <h3>Artículos</h3>
   <div>
-    <ul>
+    <ul class="d-flex justify-content-around px-2">
       <div class="row row-cols-2 row-cols-md-3 row-cols-sm-2 g-4">
         {% for articulo in page_obj %}
         <div class="col">
