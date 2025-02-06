@@ -58,7 +58,7 @@ def lista_articulos(request):
     productos = Articulo.objects.select_related('tienda').all().order_by('tienda')
 
     
-    paginator = Paginator(productos, 10)
+    paginator = Paginator(productos, 9)
     page_number = request.GET.get('page')  
 
     try:
