@@ -29,162 +29,108 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
   </head>
   <body>
     <header class="p-3 fixed-top">
-      <nav class="navbar navbar-expand-lg navbar-dark">
-        <div
-          class="container-fluid d-flex align-items-center justify-content-between"
-        >
-          <!-- Columna 1: Menú Hamburguesa + Logo + Título -->
-          <div class="d-flex align-items-center">
-            <!-- Botón de Hamburguesa -->
-            <button
-              class="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarNav"
-              aria-controls="navbarNav"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
+      <div class="row g-4">
+          <nav class="navbar navbar-dark">
+            <div
+              class="container-fluid d-flex align-items-center justify-content-between"
             >
-              <span class="navbar-toggler-icon"></span>
-            </button>
-          </div>
-          <div class="d-flex align-items-center">
-            <!-- Logo + Título -->
-            <a
-              href="/"
-              class="navbar-brand d-flex align-items-center text-white text-decoration-none"
-            >
-              <img
-                src="{% static 'Mi_negocio/logo.png' %}"
-                alt="Logo de la empresa"
-                class="logo me-2"
-                style="width: 40px; height: 40px"
-              />
-              Mi_negocio
-            </a>
-          </div>
-
-          <!-- Columna 2: Botones de Acción -->
-          <div class="d-flex align-items-center">
-            <!-- Usuario Autenticado -->
-            {% if user.is_authenticated %}
-            <span class="text-white me-2">{{ user.username }}</span>
-            {% endif %}
-
-            <!-- Botones -->
-            <a
-              href="{% url 'buscar_articulo' %}"
-              class="btn btn-outline-secondary me-2"
-              >Buscar artículo</a
-            >
-            <a href="{% url 'login' %}" class="btn btn-outline-light me-2"
-              >Login</a
-            >
-            <form action="{% url 'logout' %}" method="post" class="d-inline">
-              {% csrf_token %}
-              <button type="submit" class="btn btn-warning">Logout</button>
-            </form>
-          </div>
-        </div>
-      </nav>
-      <!-- Menú Desplegable (Oculto en Dispositivos Grandes) -->
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav flex-column w-100">
-          <li class="nav-item border-bottom py-2">
-            <a href="#" class="nav-link px-2 text-white">Acerca de</a>
-          </li>
-          <li class="nav-item border-bottom py-2">
-            <a
-              href="{% url 'lista_articulos' %}"
-              class="nav-link px-2 text-white"
-              >Lista de artículos</a
-            >
-          </li>
-          <li class="nav-item border-bottom py-2">
-            <a
-              href="https://github.com/carlosr301101"
-              class="nav-link px-2 text-white"
-              >Contacto</a
-            >
-          </li>
-        </ul>
-      </div>
-    </header>
-    <!-- 
-<header class="p-3 text-bg-dark">
-    <div class="container-fluid flex-wrap">
-    <div class="row align-items-center">
-      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-        
-        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-        <img src="{% static 'Mi_negocio/logo.png' %}" alt="Logo de la empresa" class="logo">
-          Mi_negocio<svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
-        </a>
-
-        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-            
-            <li><a href="#" class="nav-link px-2 text-white">Acerca de</a></li>
-            <li><a href="{% url 'lista_articulos'%}" class="nav-link px-2 text-white">Lista de articulos</a></li>
-         
-            <li><a href="https://github.com/carlosr301101" class="nav-link px-2 text-white">Contacto</a></li>
-            
-        </ul>
-        {% if user.is_authenticated %}
-        <li style="padding-right: 25px; color: aliceblue;">{{ user.username }}</li>
-        {%endif%}
-         
-        
-        </form> 
-
-        <div class="text-end">
-        
-            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-           
-                <a class="enlace-negro" href="{%url 'buscar_articulo' %}">
-            
-                    <button type="submit"  class="btn btn-outline-secondary me-2" >Buscar_articulo</button>
-         
+              <!-- Columna 1: Menú Hamburguesa + Logo + Título -->
+              <div class="d-flex align-items-center">
+                <!-- Botón de Hamburguesa -->
+                <button
+                  id="button-toggler"
+                  class="navbar-toggler"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#navbarNav"
+                  aria-controls="navbarNav"
+                  aria-expanded="false"
+                  aria-label="Toggle navigation"
+                >
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+              </div>
+              <div class="d-flex align-items-center">
+                <!-- Logo + Título -->
+                <a
+                  href="/"
+                  class="navbar-brand d-flex align-items-center text-white text-decoration-none"
+                >
+                  <img
+                    src="{% static 'Mi_negocio/logo.png' %}"
+                    alt="Logo de la empresa"
+                    class="logo me-2"
+                    style="width: 40px; height: 40px"
+                  />
+                  Mi_negocio
                 </a>
-
-                <a class="enlace-negro" href="{%url 'login' %}">
-                
-                    {% csrf_token %}
-                <button type="submit"  class="btn btn-outline-light me-2" >Login</button>
+              </div>
               
-             </a>
-          
             
+           
         
-            <form action="{% url 'logout' %}" method="post">
-                {% csrf_token %}
-          <button type="submit" class="btn btn-warning">Logout</button>
-         </form>
-        </ul>
+              <!-- Columna 2: Botones de Acción -->
+              <div class="d-flex align-items-center fixed-end">
+                <!-- Usuario Autenticado -->
+                {% if user.is_authenticated %}
+                <span class="text-white me-2">{{ user.username }}</span>
+                {% endif %}
 
+                <!-- Botones -->
+                <a
+                  href="{% url 'buscar_articulo' %}"
+                  class="btn btn-outline-secondary me-2"
+                  >Buscar artículo</a
+                >
+                <a href="{% url 'login' %}" class="btn btn-outline-light me-2"
+                  >Login</a
+                >
+                <form
+                  action="{% url 'logout' %}"
+                  method="post"
+                  class="d-inline"
+                >
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-warning">Logout</button>
+                </form>
+              </div>
+            </div>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav flex-column w-100">
+                <li class="nav-item border-bottom py-2">
+                  <a href="#" class="nav-link px-2 text-white">Acerca de</a>
+                </li>
+                <li class="nav-item border-bottom py-2">
+                  <a
+                    href="{% url 'lista_articulos' %}"
+                    class="nav-link px-2 text-white"
+                    >Lista de artículos</a
+                  >
+                </li>
+                <li class="nav-item border-bottom py-2">
+                  <a
+                    href="https://github.com/carlosr301101"
+                    class="nav-link px-2 text-white"
+                    >Contacto</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </nav>
         </div>
       </div>
-    </div>
-  
-    </div>
-  </header>
+      <!-- Menú Desplegable (Oculto en Dispositivos Grandes) -->
+    </header>
 
- -->
     <!-- Contenido principal -->
     <div class="container-flex">
-      <div>{% block body %} {% endblock body %}</div>
+      <div >{% block body %} {% endblock body %}</div>
     </div>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <footer>
       <p>&copy; 2025 @int_64</p>

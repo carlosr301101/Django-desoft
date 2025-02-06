@@ -1,43 +1,56 @@
-{% extends "Mi_negocio/layout.html" %}
-
-{% block title %}Home{% endblock %}
-
-{% block body %}
-
-<ul class="content blanco container-flex">
+{% extends "Mi_negocio/layout.html" %} {% block title %}Home{% endblock %}
+{%block body %}
+<div class="container text-center py-5">
+  <!-- Mensaje de Bienvenida -->
+  <div class="mb-4">
     {% if user.is_authenticated %}
-    <h1>
-    Hola {{ user.username }}!
-    </h1>
+    <h1 class="display-4 text-secondary">¡Hola, {{ user.username }}!</h1>
     {% else %}
-    <h1 class="blanco">No esta logueado</h1>
-    
+    <h1 class="display-4 text-secondary">No estás logueado</h1>
     {% endif %}
-<div class="item">
-    
-    <a href="{% url 'listar_tiendas'%}" style="text-decoration: none; color: inherit;"><button class="btn btn-secondary"><div class="enlace-negro">Ver Tiendas</div></button></a>
-    
-</div>
-<p>
+  </div>
 
-</p>
+  <!-- Contenedor de Acciones -->
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <!-- Ver Tiendas -->
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body d-flex flex-column justify-content-center">
+          <h5 class="card-title">Ver Tiendas</h5>
+          <a href="{% url 'listar_tiendas' %}" class="btn btn-secondary mt-auto"
+            >Ir a Tiendas</a
+          >
+        </div>
+      </div>
+    </div>
 
-<div class="item">
-   
-    <a href="{% url 'lista_articulos'%}" style="text-decoration: none; color: inherit;"> <button class="btn btn-secondary"><div class="enlace-negro">Lista articulos</div></button></a>
-</button>
-</div>
-<p>
-    
-</p>
-{% if user.is_authenticated %}
-<div class="item">
+    <!-- Lista de Artículos -->
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body d-flex flex-column justify-content-center">
+          <h5 class="card-title">Lista de Artículos</h5>
+          <a
+            href="{% url 'lista_articulos' %}"
+            class="btn btn-secondary mt-auto"
+            >Ver Artículos</a
+          >
+        </div>
+      </div>
+    </div>
 
-<div>
-    <a href="{% url 'crear_tienda'%}" style="text-decoration: none; color: inherit;"><button class="btn btn-primary"><div class="enlace-negro">Crear Tienda</div></button></a>
+    <!-- Crear Tienda (Solo para Usuarios Autenticados) -->
+    {% if user.is_authenticated %}
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body d-flex flex-column justify-content-center">
+          <h5 class="card-title">Crear Tienda</h5>
+          <a href="{% url 'crear_tienda' %}" class="btn btn-primary mt-auto"
+            >Crear Tienda</a
+          >
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
 </div>
-</button>
-</div>
-{%endif%}
-</ul>
-{% endblock body%}
+{% endblock %}

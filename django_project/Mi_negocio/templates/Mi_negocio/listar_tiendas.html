@@ -1,25 +1,27 @@
 {% extends 'Mi_negocio/layout.html' %}
 
 {% block body %}
-<div class="blanco">
-    <h2 class=" ">Lista de tiendas</h2>
-    <p>Contamos con {{cantidad}} tiendas</p>
-    <ul>
-    
-        {% for tienda in page_obj %}
-            <li style="margin-top: 20px;">
-                
-                <a class="enlace-negro" href="{% url 'ver_tienda' tienda_name=tienda.nombre %}"><button class="btn btn-secondary "><div class="enlace-negro">{{ tienda.nombre }}</div></button></a>
-           
-                </button>
-                
-            </li>
-        {% endfor %}
-    </ul>
-
+<div class="blanco content">
+    <h2 class="text-center">Lista de Tiendas</h2>
+    <p class="text-center">Contamos con {{ cantidad }} tiendas</p>
+  
+    <!-- Contenedor de la Cuadrícula -->
+    <div class="row row-cols-2 row-cols-md-3 g-4">
+      {% for tienda in page_obj %}
+        <div class="col">
+          <div class="card h-100 text-center">
+            <div class="card-body d-flex flex-column justify-content-center">
+              <h5 class="card-title">{{ tienda.nombre }}</h5>
+              <a href="{% url 'ver_tienda' tienda_name=tienda.nombre %}" class="btn btn-secondary mt-auto">Ver Tienda</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
 
     <!-- Paginación -->
-    <div class="pagination">
+    <div class="pagination blanco">
         <span class="step-links">
             {% if page_obj.has_previous %}
                 <a href="?page=1">&laquo; Primera</a>

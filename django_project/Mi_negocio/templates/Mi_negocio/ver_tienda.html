@@ -1,6 +1,12 @@
 {% extends 'Mi_negocio/layout.html' %} {%load static%} {% block body %}
+<style>
+  body {
+    background-image: none;
+    background: linear-gradient(190deg, #cedcf7, #e3edf7);
+  }
+</style>
 <script src="{% static 'Mi_negocio/carrito.js' %}"></script>
-<div class="no-bg">
+<div class="no-bg content">
   <!-- Carrito -->
   <div class="floating-cart">
     <a href="#" id="openCart" class="cart-icon">

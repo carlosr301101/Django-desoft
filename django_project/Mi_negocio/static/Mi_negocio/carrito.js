@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const cart = JSON.parse(sessionStorage.getItem("cart")) || [];
   const cartCount = document.getElementById("cartCount");
   const cartItems = document.getElementById("cartItems");
   const cartTotal = document.getElementById("cartTotal");
@@ -27,13 +27,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     cart.forEach((item, index) => {
       const li = document.createElement("li");
+      const div = document.createElement("div");
+      div.className = "d-flex align-items-center";
+      li.className = "d-flex align-items-center";
       li.style.display = "flex";
       li.style.justifyContent = "space-between";
       li.style.alignItems = "right";
 
-      const ul = document.createElement("ul");
-      ul.style.display = "flex";
-      ul.className = "nav col-12 col-lg-auto   mb-md-0";
       // Detalles del artículo
       const details = document.createElement("span");
       details.textContent = `${item.titulo} - $${item.precio} x ${item.quantity}`;
@@ -48,6 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
       removeButton.style.borderRadius = "10px";
       removeButton.style.cursor = "pointer";
       removeButton.style.padding = "5px 10px";
+      removeButton.style.alignItems = "right";
 
       const add_1Button = document.createElement("button");
       add_1Button.textContent = "+";
@@ -57,10 +58,11 @@ document.addEventListener("DOMContentLoaded", function () {
       add_1Button.style.borderRadius = "10px";
       add_1Button.style.cursor = "pointer";
       add_1Button.style.padding = "5px 10px";
+      add_1Button.style.alignItems = "right";
 
       add_1Button.addEventListener("click", function () {
         cart[index]["quantity"] += 1; // Elimina el artículo del array
-        localStorage.setItem("cart", JSON.stringify(cart)); // Actualiza el localStorage
+        sessionStorage.setItem("cart", JSON.stringify(cart)); // Actualiza el localStorage
         updateCartUI(); // Actualiza la interfaz del crrito
       });
 
@@ -71,15 +73,14 @@ document.addEventListener("DOMContentLoaded", function () {
           )
         ) {
           cart.splice(index, 1); // Elimina el artículo del array
-          localStorage.setItem("cart", JSON.stringify(cart)); // Actualiza el localStorage
+          sessionStorage.setItem("cart", JSON.stringify(cart)); // Actualiza el localStorage
           updateCartUI(); // Actualiza la interfaz del carrito
         }
       });
 
-      ul.appendChild(add_1Button);
-      ul.appendChild(removeButton);
-      li.appendChild(ul);
-
+      div.appendChild(add_1Button);
+      div.appendChild(removeButton);
+      li.appendChild(div);
       cartItems.appendChild(li);
 
       // Calcular el total
@@ -103,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
         cart.push({ id: articuloId, titulo, precio, quantity: 1 });
       }
 
-      localStorage.setItem("cart", JSON.stringify(cart));
+      sessionStorage.setItem("cart", JSON.stringify(cart));
       updateCartUI();
     });
   });
