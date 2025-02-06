@@ -90,13 +90,14 @@
               </li>
             </ul>
 
-            <!-- Usuario Autenticado -->
-            {% if user.is_authenticated %}
-            <span class="text-white me-3">{{ user.username }}</span>
-            {% endif %}
-
             <!-- Botones de Acción -->
-            <ul class="navbar-nav">
+            <ul class="navbar-nav mb-2 mb-lg-0">
+              <li class="nav-item">
+                <!-- Usuario Autenticado -->
+                {% if user.is_authenticated %}
+                <span class="text-white me-3">{{ user.username }}</span>
+                {% endif %}
+              </li>
               <li class="nav-item">
                 <a
                   href="{% url 'buscar_articulo' %}"
