@@ -66,6 +66,7 @@ body {
 }
 .card-body {
   border-color: transparent;
+  background: linear-gradient(190deg, #cedcf7, #9ac6f1);
   /*    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); */
 }
 .enlace-negro {
