@@ -61,6 +61,14 @@ class Articulo(models.Model):
         """
         Sobrescribe el método save() para comprimir la imagen antes de guardarla.
         """
+        try:
+            old_instance = Articulo.objects.get(id=self.id)
+            if old_instance.imagen and old_instance.imagen != self.imagen:
+                if os.path.isfile(old_instance.imagen.path):
+                    os.remove(old_instance.imagen.path)
+        except Articulo.DoesNotExist:
+            pass
+        
         if self.imagen:
             self.imagen = self.compress_image(self.imagen)
 

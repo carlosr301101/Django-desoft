@@ -85,7 +85,8 @@
             </div>
             {% if articulo.tienda.propietario == user %}
             <!-- Botón para eliminar el artículo -->
-            <div class="card-button">
+            <div class="d-flex gap-2 justify-content-between card">
+              <!-- Botón Eliminar -->
               <form
                 action="{% url 'eliminar_articulo' articulo.id %}"
                 method="post"
@@ -98,6 +99,18 @@
                   onclick="return confirm('¿Estás seguro de que deseas eliminar este artículo?');"
                 >
                   Eliminar
+                </button>
+              </form>
+
+              <!-- Botón Modificar -->
+              <form
+                action="{% url 'modificar_articulo' articulo.id %}"
+                method="get"
+                style="display: inline"
+              >
+                {% csrf_token %}
+                <button class="btn btn-secondary w-100" type="submit">
+                  Modificar
                 </button>
               </form>
             </div>

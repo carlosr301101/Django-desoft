@@ -14,7 +14,7 @@ import os
 from datetime import datetime
 from django.utils.text import slugify
 import qrcode
-
+from django.contrib import messages
 
 
 # Create your views here.
@@ -83,6 +83,28 @@ def eliminar_articulo(request, articulo_id):
         articulo.delete()
     
     return redirect('ver_tienda', tienda_name=articulo.tienda.nombre)
+
+
+@login_required
+def modificar_articulo(request, articulo_id):
+    # Obtener el artículo o devolver un error 404 si no existe
+    articulo = get_object_or_404(Articulo, id=articulo_id)
+    
+    # Verificar que el usuario actual es el propietario de la tienda del artículo
+    if articulo.tienda.propietario != request.user:
+        return redirect('index')  # Redirige a una página de error si no tiene permisos
+
+    if request.method == 'POST':
+        # Si el formulario fue enviado, procesarlo
+        form = ArticuloForm(request.POST, request.FILES, instance=articulo)
+        if form.is_valid():
+            form.save()  # Guarda los cambios en la base de datos
+            return redirect('ver_tienda', tienda_name=articulo.tienda.nombre)  # Redirige a la vista del artículo modificado
+    else:
+        # Si es una solicitud GET, mostrar el formulario prellenado
+        form = ArticuloForm(instance=articulo)
+   
+    return render(request, 'Mi_negocio/modificar_articulo.html', {'form': form, 'articulo': articulo})
 
 @login_required
 def crear_tienda(request):

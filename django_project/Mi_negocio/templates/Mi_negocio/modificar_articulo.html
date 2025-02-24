@@ -1,0 +1,25 @@
+{% extends 'Mi_negocio/layout.html' %} {% block body %}
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+          <h2>Modificar artículo {{ articulo.titulo }}</h2>
+        </div>
+        <div class="card-body">
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %} {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Modificar</button>
+            <a
+              href="{% url 'ver_tienda' tienda_name=articulo.tienda.nombre %}"
+              class="btn btn-secondary"
+              >Cancelar</a
+            >
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p></p>
+</div>
+{% endblock %}
