@@ -15,7 +15,7 @@ urlpatterns=[
     path('crear_tienda/', views.crear_tienda, name='crear_tienda'),
 
     path('ver_tienda/<str:tienda_name>/', views.ver_tienda, name='ver_tienda'),
-
+     path('modificar_tienda/<str:tienda_name>/', views.modificar_tienda, name='modificar_tienda'),
     path('generate-pdf/<int:tienda_id>/', views.generate_pdf, name='generate_pdf'),
     path('ver_tienda/<str:tienda_name>/agregar_articulo/', views.agregar_articulo, name='agregar_articulo'),
     path('ver_tienda/eliminar/<int:articulo_id>/', views.eliminar_articulo, name='eliminar_articulo'),

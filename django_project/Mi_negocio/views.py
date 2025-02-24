@@ -85,6 +85,33 @@ def eliminar_articulo(request, articulo_id):
     return redirect('ver_tienda', tienda_name=articulo.tienda.nombre)
 
 
+
+@login_required
+def modificar_tienda(request, tienda_name):
+    # Obtener el artículo o devolver un error 404 si no existe
+    tienda = get_object_or_404(Tienda, nombre=tienda_name)
+
+    # Verificar que el usuario actual es el propietario de la tienda del artículo
+    if tienda.propietario != request.user:
+        return redirect('index')  # Redirige a una página de error si no tiene permisos
+
+    if request.method == 'POST':
+        # Si el formulario fue enviado, procesarlo
+        form = TiendaForm(request.POST, request.FILES, instance=tienda)
+        if form.is_valid():
+            form.save()  # Guarda los cambios en la base de datos
+            return redirect('ver_tienda', tienda_name=tienda.nombre)  # Redirige a la vista del artículo modificado
+    else:
+        # Si es una solicitud GET, mostrar el formulario prellenado
+        form = TiendaForm(instance=tienda)
+   
+    return render(request, 'Mi_negocio/modificar_tienda.html', {'form': form, 'tienda': tienda})
+
+
+
+
+
+
 @login_required
 def modificar_articulo(request, articulo_id):
     # Obtener el artículo o devolver un error 404 si no existe

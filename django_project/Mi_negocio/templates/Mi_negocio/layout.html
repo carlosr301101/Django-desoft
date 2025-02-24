@@ -112,7 +112,21 @@
             <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav flex-column w-100">
                 <li class="nav-item border-bottom py-2">
+                  <a
+                    href="{% url 'index' %}"
+                    class="nav-link px-2 text-white"
+                    >Inicio</a
+                  >
+                </li>
+                <li class="nav-item border-bottom py-2">
                   <a href="#" class="nav-link px-2 text-white">Acerca de</a>
+                </li>
+                <li class="nav-item border-bottom py-2">
+                  <a
+                    href="{% url 'listar_tiendas' %}"
+                    class="nav-link px-2 text-white"
+                    >Lista de Tiendas</a
+                  >
                 </li>
                 <li class="nav-item border-bottom py-2">
                   <a
@@ -127,6 +141,13 @@
                     class="nav-link px-2 text-white"
                     >Contacto</a
                   >
+                  <a
+          href="https://wa.me/+5355246437?text=¡Hola!%20Quiero%20saber%20más%20sobre%20tus%20productos."
+          target="_blank"
+          class="whatsapp-button"
+        >
+          <i class="fab fa-whatsapp" style="font-size: 24px;padding-left: 15px ;color: green;"></i>
+        </a>
                 </li>
               </ul>
             </div>

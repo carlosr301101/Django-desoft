@@ -146,6 +146,11 @@
           <button class="btn btn-primary">Generar QR</button>
         </a>
       </li>
+      <li style="margin-left: 15px">
+        <a href="{% url 'modificar_tienda' tienda_name=tienda.nombre%}">
+          <button class="btn btn-secondary">Modificar Tienda</button>
+        </a>
+      </li>
     </ul>
   </div>
   {% endif %} {% if page_obj %}
